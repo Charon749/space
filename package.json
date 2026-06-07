@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:export": "next build && mkdir -p out && cp -r .next/* out/",
     "start": "next start",
     "lint": "next lint"
   },
