@@ -1,12 +1,39 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { travelers, getTodayUniverse, stars } from "@/data/mockData";
+import { 
+  travelers, 
+  getTodayUniverse, 
+  generateRouteMap, 
+  souvenirs,
+  getUnlockedTitles,
+  type RouteMap
+} from "@/data/mockData";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/ui/navigation";
-import { ArrowRight, Star, Trophy, Sparkles } from "lucide-react";
+import { 
+  ArrowRight, 
+  Star, 
+  Trophy, 
+  Sparkles, 
+  Compass, 
+  Briefcase, 
+  Crown,
+  MapPin,
+  Zap
+} from "lucide-react";
 
 export default function Home() {
   const todayUniverse = getTodayUniverse();
+  const [routeMap, setRouteMap] = useState<RouteMap | null>(null);
+  const unlockedTitles = getUnlockedTitles();
+
+  useEffect(() => {
+    const map = generateRouteMap();
+    setRouteMap(map);
+  }, []);
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
@@ -68,11 +95,9 @@ export default function Home() {
     <main className={`min-h-screen pb-20 ${todayUniverse.backgroundClass}`}>
       {/* 动态背景装饰 */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {/* 背景渐变光效 */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cosmic-purple/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cosmic-blue/5 rounded-full blur-3xl" />
         
-        {/* 漂浮的星星装饰 */}
         {Array.from({ length: 30 }).map((_, i) => (
           <div
             key={i}
@@ -86,70 +111,48 @@ export default function Home() {
         ))}
       </div>
 
-      <div className="relative max-w-md mx-auto px-6 py-12">
+      <div className="relative max-w-md mx-auto px-6 py-8">
         {/* 顶部标题 */}
-        <header className="text-center mb-12 animate-fade-in">
-          <div className={`text-3xl mb-4 animate-breathe ${getRarityColor(todayUniverse.rarity)}`}>
-            {todayUniverse.icon}
+        <header className="text-center mb-8 animate-fade-in">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span className="text-4xl">{travelers.me.avatar}</span>
+            <span className="text-4xl">❤️</span>
+            <span className="text-4xl">{travelers.partner.avatar}</span>
           </div>
           <h1 className="text-2xl font-light tracking-wide mb-2">宇宙旅人</h1>
-          <p className="text-muted text-sm font-light">探索无限宇宙，创造共同记忆</p>
+          <p className="text-muted text-sm font-light">共同完成一场持续数年的宇宙旅行</p>
         </header>
 
-        {/* 今日宇宙卡片 - 盲盒感设计 */}
-        <section className="mb-8 animate-fade-in-up">
-          <Card className={`p-6 bg-gradient-to-br from-card/90 to-card/50 backdrop-blur-md border-cosmic-purple/30 hover:border-cosmic-purple/50 transition-all duration-500 relative overflow-hidden`}>
-            {/* 背景光效 */}
+        {/* 今日宇宙卡片 */}
+        <section className="mb-6 animate-fade-in-up">
+          <Card className={`p-5 bg-gradient-to-br from-card/90 to-card/50 backdrop-blur-md border-cosmic-purple/30 hover:border-cosmic-purple/50 transition-all duration-500 relative overflow-hidden`}>
             <div className="absolute top-0 right-0 w-40 h-40 bg-cosmic-purple/10 rounded-full blur-2xl" />
             <div className="absolute bottom-0 left-0 w-32 h-32 bg-cosmic-blue/10 rounded-full blur-2xl" />
             
             <div className="relative z-10">
-              {/* 稀有度标签 */}
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-3">
                 <span className={`text-xs font-light px-2 py-1 rounded-full ${getRarityBg(todayUniverse.rarity)} ${getRarityColor(todayUniverse.rarity)}`}>
-                  {getRarityLabel(todayUniverse.rarity)}宇宙
+                  {getRarityLabel(todayUniverse.rarity)}
                 </span>
-                <span className="text-xs font-light text-muted">
-                  {getCategoryLabel(todayUniverse.category)}
-                </span>
+                <span className="text-xs font-light text-muted">今日宇宙</span>
               </div>
 
-              {/* 宇宙名称和图标 */}
-              <div className="flex items-center gap-4 mb-4">
-                <span className="text-5xl">{todayUniverse.icon}</span>
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-4xl animate-breathe">{todayUniverse.icon}</span>
                 <div>
-                  <h2 className="text-2xl font-light">{todayUniverse.name}</h2>
+                  <h2 className="text-xl font-light">{todayUniverse.name}</h2>
                   <p className="text-xs font-light text-muted">{todayUniverse.title}</p>
                 </div>
               </div>
 
-              {/* 宇宙描述 */}
-              <p className="text-muted text-sm font-light leading-relaxed mb-6 line-clamp-3">
-                {todayUniverse.description}
-              </p>
-
-              {/* 角色身份 */}
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                <div className="p-3 rounded-lg bg-card/50 border border-border/30">
-                  <div className="text-xs font-light text-muted mb-1">你的身份</div>
-                  <div className="text-sm font-light">{todayUniverse.yourRole}</div>
-                </div>
-                <div className="p-3 rounded-lg bg-card/50 border border-border/30">
-                  <div className="text-xs font-light text-muted mb-1">旅伴身份</div>
-                  <div className="text-sm font-light">{todayUniverse.partnerRole}</div>
-                </div>
-              </div>
-
-              {/* 玩法预告 */}
-              <div className="flex items-center gap-2 mb-6 p-3 rounded-lg bg-cosmic-purple/5 border border-cosmic-purple/10">
+              <div className="flex items-center gap-2 mb-4 p-3 rounded-lg bg-cosmic-purple/5 border border-cosmic-purple/10">
                 <Sparkles className="w-4 h-4 text-cosmic-purple" />
-                <div>
+                <div className="flex-1">
                   <div className="text-sm font-light">{todayUniverse.interactionTitle}</div>
                   <div className="text-xs font-light text-muted">{todayUniverse.interactionDescription}</div>
                 </div>
               </div>
 
-              {/* 开始按钮 */}
               <Link href="/today">
                 <Button className="w-full group bg-gradient-to-r from-cosmic-purple/20 to-cosmic-blue/20 hover:from-cosmic-purple/30 hover:to-cosmic-blue/30 border-cosmic-purple/40">
                   开始今日冒险
@@ -160,96 +163,168 @@ export default function Home() {
           </Card>
         </section>
 
-        {/* 旅程统计 */}
-        <section className="mb-8 animate-fade-in-delay-1">
-          <Card className="p-6 bg-card/30 backdrop-blur-sm border-border/30">
-            <h3 className="text-sm font-light mb-4 text-muted">旅程记录</h3>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="text-center">
-                <div className="text-cosmic-purple text-xl font-light mb-1">
-                  {travelers.journey.days}
-                </div>
-                <div className="text-muted text-xs font-light">同行天数</div>
+        {/* 航线进度 */}
+        <section className="mb-6 animate-fade-in-up">
+          <Card className="p-5 bg-card/30 backdrop-blur-sm border-border/30">
+            <div className="flex items-center gap-2 mb-4">
+              <Compass className="w-4 h-4 text-cosmic-purple" />
+              <h3 className="text-sm font-light">航线进度</h3>
+            </div>
+            
+            <div className="grid grid-cols-3 gap-4 mb-4">
+              <div className="text-center p-3 rounded-lg bg-card/50">
+                <div className="text-xl font-light text-cosmic-purple">{routeMap?.visitedNodes || 0}</div>
+                <div className="text-xs font-light text-muted">已探索</div>
               </div>
-              <div className="text-center">
-                <div className="text-cosmic-blue text-xl font-light mb-1">
-                  {travelers.journey.universesExplored}
-                </div>
-                <div className="text-muted text-xs font-light">探索宇宙</div>
+              <div className="text-center p-3 rounded-lg bg-card/50">
+                <div className="text-xl font-light text-cosmic-blue">{routeMap?.unlockedNodes || 0}</div>
+                <div className="text-xs font-light text-muted">已解锁</div>
               </div>
-              <div className="text-center">
-                <div className="text-cosmic-purple text-xl font-light mb-1">
-                  {travelers.journey.memoriesRecorded}
-                </div>
-                <div className="text-muted text-xs font-light">共同记忆</div>
+              <div className="text-center p-3 rounded-lg bg-card/50">
+                <div className="text-xl font-light text-muted">{routeMap?.totalNodes || 30}</div>
+                <div className="text-xs font-light text-muted">总计</div>
               </div>
             </div>
 
-            {/* 徽章 */}
-            <div className="mt-4 pt-4 border-t border-border/30">
-              <div className="flex items-center gap-1 mb-2">
-                <Trophy className="w-4 h-4 text-yellow-400" />
-                <span className="text-xs font-light text-muted">获得徽章</span>
+            {/* 进度条 */}
+            <div className="relative">
+              <div className="h-2 bg-card rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-cosmic-purple to-cosmic-blue transition-all duration-500"
+                  style={{ width: `${((routeMap?.visitedNodes || 0) / (routeMap?.totalNodes || 30)) * 100}%` }}
+                />
               </div>
-              <div className="flex flex-wrap gap-2">
-                {travelers.journey.badges.map((badge) => (
-                  <span
-                    key={badge}
-                    className="text-xs font-light px-2 py-1 rounded-full bg-cosmic-purple/10 text-cosmic-purple"
-                  >
-                    {badge}
-                  </span>
-                ))}
+              <div className="flex justify-between mt-2">
+                <span className="text-xs font-light text-muted">开始旅程</span>
+                <span className="text-xs font-light text-muted">完成所有宇宙</span>
               </div>
+            </div>
+
+            <Link href="/route">
+              <Button variant="ghost" className="w-full mt-4 text-cosmic-purple hover:bg-cosmic-purple/10">
+                <MapPin className="w-4 h-4 mr-2" />
+                查看航线地图
+              </Button>
+            </Link>
+          </Card>
+        </section>
+
+        {/* 旅人档案概览 */}
+        <section className="mb-6 animate-fade-in-delay-1">
+          <Card className="p-5 bg-card/30 backdrop-blur-sm border-border/30">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <Crown className="w-4 h-4 text-yellow-400" />
+                <h3 className="text-sm font-light">旅人档案</h3>
+              </div>
+              <span className="text-xs font-light text-muted">Lv.{travelers.me.level}</span>
+            </div>
+
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 rounded-full bg-cosmic-purple/20 flex items-center justify-center">
+                <span className="text-2xl">{travelers.me.avatar}</span>
+              </div>
+              <div className="flex-1">
+                <div className="text-sm font-light">{travelers.me.name}</div>
+                <div className="text-xs font-light text-muted">{travelers.me.title}</div>
+              </div>
+              <div className="text-right">
+                <div className="text-sm font-light text-cosmic-purple">{travelers.me.exp}</div>
+                <div className="text-xs font-light text-muted">/ {travelers.me.nextLevelExp} EXP</div>
+              </div>
+            </div>
+
+            {/* 经验条 */}
+            <div className="h-1.5 bg-card rounded-full overflow-hidden mb-4">
+              <div 
+                className="h-full bg-gradient-to-r from-yellow-400 to-orange-400 transition-all duration-500"
+                style={{ width: `${(travelers.me.exp / travelers.me.nextLevelExp) * 100}%` }}
+              />
+            </div>
+
+            {/* 称号展示 */}
+            <div className="flex items-center gap-2 mb-2">
+              <Zap className="w-3 h-3 text-cosmic-blue" />
+              <span className="text-xs font-light text-muted">已解锁称号</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {unlockedTitles.slice(0, 4).map((title) => (
+                <span
+                  key={title.id}
+                  className={`text-xs font-light px-2 py-1 rounded-full ${getRarityBg(title.rarity)} ${getRarityColor(title.rarity)}`}
+                >
+                  {title.icon} {title.name}
+                </span>
+              ))}
             </div>
           </Card>
         </section>
 
-        {/* 最近探索的星星 */}
-        <section className="animate-fade-in-delay-2">
-          <h3 className="text-sm font-light mb-4 text-muted">星图预览</h3>
-          <Card className="p-4 bg-card/30 backdrop-blur-sm border-border/30">
-            <div className="relative h-32">
-              {stars.slice(0, 8).map((star, index) => (
-                <button
-                  key={star.id}
-                  className="absolute transform -translate-x-1/2 -translate-y-1/2 focus:outline-none"
-                  style={{
-                    left: `${star.x}%`,
-                    top: `${star.y}%`,
-                  }}
-                >
-                  <div
-                    className="rounded-full transition-all duration-300 hover:scale-150"
-                    style={{
-                      width: `${star.size * 2 + 2}px`,
-                      height: `${star.size * 2 + 2}px`,
-                      backgroundColor: star.rarity === 'legendary' ? '#FACC15' : 
-                                       star.rarity === 'epic' ? '#A78BFA' :
-                                       star.rarity === 'rare' ? '#38BDF8' : '#A78BFA',
-                      opacity: star.brightness,
-                      boxShadow: `0 0 ${star.size * 4}px ${star.rarity === 'legendary' ? '#FACC1560' : '#A78BFA60'}`,
-                    }}
-                  />
-                </button>
-              ))}
-              {/* 装饰小星星 */}
-              {Array.from({ length: 15 }).map((_, i) => (
+        {/* 纪念品展示 */}
+        <section className="mb-6 animate-fade-in-delay-2">
+          <Card className="p-5 bg-card/30 backdrop-blur-sm border-border/30">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <Briefcase className="w-4 h-4 text-cosmic-blue" />
+                <h3 className="text-sm font-light">宇宙纪念品</h3>
+              </div>
+              <span className="text-xs font-light text-muted">{souvenirs.length} 件</span>
+            </div>
+
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              {souvenirs.slice(0, 6).map((souvenir) => (
                 <div
-                  key={`deco-${i}`}
-                  className="absolute w-0.5 h-0.5 bg-white/20 rounded-full"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                  }}
-                />
+                  key={souvenir.id}
+                  className="flex-shrink-0 w-16 h-16 rounded-xl bg-card/50 border border-border/30 flex flex-col items-center justify-center hover:border-cosmic-purple/30 transition-colors cursor-pointer"
+                  title={souvenir.name}
+                >
+                  <span className="text-2xl">{souvenir.icon}</span>
+                  <span className={`text-xs ${getRarityColor(souvenir.rarity)}`}>
+                    {souvenir.name.slice(0, 2)}
+                  </span>
+                </div>
               ))}
             </div>
-            <div className="flex items-center justify-center mt-3">
-              <Link href="/starmap" className="flex items-center gap-1 text-xs font-light text-cosmic-purple hover:text-cosmic-purple/80">
-                <Star className="w-3 h-3" fill="currentColor" />
-                查看完整星图
-              </Link>
+          </Card>
+        </section>
+
+        {/* 统计概览 */}
+        <section className="animate-fade-in-delay-3">
+          <Card className="p-5 bg-card/30 backdrop-blur-sm border-border/30">
+            <div className="flex items-center gap-2 mb-4">
+              <Trophy className="w-4 h-4 text-yellow-400" />
+              <h3 className="text-sm font-light">旅程统计</h3>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="flex items-center gap-2 p-3 rounded-lg bg-card/50">
+                <Star className="w-4 h-4 text-cosmic-purple" fill="currentColor" />
+                <div>
+                  <div className="text-sm font-light">{travelers.me.stats.daysTraveled}</div>
+                  <div className="text-xs font-light text-muted">旅行天数</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 p-3 rounded-lg bg-card/50">
+                <Sparkles className="w-4 h-4 text-cosmic-blue" />
+                <div>
+                  <div className="text-sm font-light">{travelers.me.stats.memoriesRecorded}</div>
+                  <div className="text-xs font-light text-muted">共同记忆</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 p-3 rounded-lg bg-card/50">
+                <span className="text-lg">✉️</span>
+                <div>
+                  <div className="text-sm font-light">{travelers.me.stats.lettersSent}</div>
+                  <div className="text-xs font-light text-muted">信件往来</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 p-3 rounded-lg bg-card/50">
+                <span className="text-lg">🎁</span>
+                <div>
+                  <div className="text-sm font-light">{travelers.me.stats.giftsExchanged}</div>
+                  <div className="text-xs font-light text-muted">礼物交换</div>
+                </div>
+              </div>
             </div>
           </Card>
         </section>

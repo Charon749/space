@@ -1,21 +1,170 @@
+// 等级配置
+export const levelConfig = {
+  baseExp: 100,
+  expMultiplier: 1.5,
+  getExpForLevel: (level: number): number => {
+    return Math.floor(levelConfig.baseExp * Math.pow(levelConfig.expMultiplier, level - 1));
+  },
+  getLevelFromExp: (exp: number): number => {
+    let level = 1;
+    let requiredExp = levelConfig.baseExp;
+    while (exp >= requiredExp) {
+      exp -= requiredExp;
+      level++;
+      requiredExp = Math.floor(levelConfig.baseExp * Math.pow(levelConfig.expMultiplier, level - 1));
+    }
+    return level;
+  }
+};
+
+// 称号数据
+export interface Title {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  rarity: Rarity;
+  condition: string;
+  unlocked: boolean;
+  unlockedAt?: string;
+  effects?: {
+    expBonus?: number;
+    memoryBonus?: number;
+    rareDropRate?: number;
+  };
+}
+
+// 纪念品数据
+export interface Souvenir {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  rarity: Rarity;
+  universeId: string;
+  universeName: string;
+  category: 'artifact' | 'crystal' | 'plant' | 'creature' | 'document' | 'unknown';
+  obtainedAt: string;
+  story?: string;
+}
+
+// 背包数据
+export interface InventoryItem {
+  id: string;
+  itemId: string;
+  quantity: number;
+  type: 'souvenir' | 'currency' | 'consumable' | 'material';
+}
+
+// 航线节点
+export interface RouteNode {
+  universeId: string;
+  unlocked: boolean;
+  visited: boolean;
+  connections: string[];
+  requiredLevel?: number;
+  requiredTitles?: string[];
+  requiredBadges?: string[];
+}
+
+// 航线地图
+export interface RouteMap {
+  nodes: Record<string, RouteNode>;
+  currentNode: string;
+  totalNodes: number;
+  unlockedNodes: number;
+  visitedNodes: number;
+}
+
+// 旅人档案
+export interface TravelerProfile {
+  id: string;
+  name: string;
+  avatar: string;
+  title: string;
+  level: number;
+  exp: number;
+  nextLevelExp: number;
+  titles: Title[];
+  activeTitle?: string;
+  stats: {
+    daysTraveled: number;
+    universesExplored: number;
+    memoriesRecorded: number;
+    lettersSent: number;
+    giftsExchanged: number;
+    storiesCreated: number;
+  };
+  preferences: {
+    favoriteCategory: Category;
+    favoriteUniverse?: string;
+  };
+}
+
 // 用户信息
-export const travelers = {
+export const travelers: {
+  me: TravelerProfile;
+  partner: TravelerProfile;
+  routeMap: RouteMap;
+  inventory: InventoryItem[];
+  souvenirs: Souvenir[];
+} = {
   me: {
+    id: "traveler-1",
     name: "旅人",
     avatar: "✦",
-    title: "星际探索者"
+    title: "星际探索者",
+    level: 12,
+    exp: 2350,
+    nextLevelExp: 3375,
+    titles: [],
+    activeTitle: "star-explorer",
+    stats: {
+      daysTraveled: 438,
+      universesExplored: 17,
+      memoriesRecorded: 58,
+      lettersSent: 23,
+      giftsExchanged: 15,
+      storiesCreated: 8
+    },
+    preferences: {
+      favoriteCategory: "fantasy"
+    }
   },
   partner: {
+    id: "traveler-2",
     name: "旅伴",
     avatar: "✧",
-    title: "宇宙漫游者"
+    title: "宇宙漫游者",
+    level: 10,
+    exp: 1800,
+    nextLevelExp: 2250,
+    titles: [],
+    activeTitle: "cosmic-wanderer",
+    stats: {
+      daysTraveled: 438,
+      universesExplored: 17,
+      memoriesRecorded: 58,
+      lettersSent: 21,
+      giftsExchanged: 15,
+      storiesCreated: 8
+    },
+    preferences: {
+      favoriteCategory: "healing"
+    }
   },
-  journey: {
-    days: 438,
-    universesExplored: 17,
-    memoriesRecorded: 58,
-    badges: ["初入宇宙", "星光收集者", "时空旅者", "连续7天", "连续30天"]
-  }
+  routeMap: {
+    nodes: {},
+    currentNode: "cloud-train",
+    totalNodes: 30,
+    unlockedNodes: 18,
+    visitedNodes: 17
+  },
+  inventory: [
+    { id: "inv-1", itemId: "stardust", quantity: 120, type: "currency" },
+    { id: "inv-2", itemId: "memory-crystal", quantity: 5, type: "consumable" }
+  ],
+  souvenirs: []
 };
 
 // 互动类型枚举
@@ -1080,4 +1229,305 @@ export const getUnlockedBadges = (): Badge[] => {
 // 获取未解锁的徽章
 export const getLockedBadges = (): Badge[] => {
   return badges.filter(b => !b.unlocked);
+};
+
+// 称号数据
+export const titles: Title[] = [
+  {
+    id: "beginner",
+    name: "新手旅人",
+    description: "刚刚踏上宇宙旅行的征程",
+    icon: "🌱",
+    rarity: "common",
+    condition: "完成1个宇宙",
+    unlocked: true,
+    unlockedAt: "2023-12-15",
+    effects: { expBonus: 5 }
+  },
+  {
+    id: "star-explorer",
+    name: "星际探索者",
+    description: "探索过多个宇宙的勇敢旅人",
+    icon: "🌟",
+    rarity: "common",
+    condition: "完成10个宇宙",
+    unlocked: true,
+    unlockedAt: "2024-01-05",
+    effects: { expBonus: 10 }
+  },
+  {
+    id: "cosmic-wanderer",
+    name: "宇宙漫游者",
+    description: "在宇宙间自由穿梭的旅行者",
+    icon: "🌌",
+    rarity: "rare",
+    condition: "完成20个宇宙",
+    unlocked: true,
+    unlockedAt: "2024-01-20",
+    effects: { expBonus: 15, memoryBonus: 5 }
+  },
+  {
+    id: "memory-keeper",
+    name: "记忆守护者",
+    description: "珍视每一段共同记忆",
+    icon: "📖",
+    rarity: "rare",
+    condition: "记录30个记忆",
+    unlocked: true,
+    unlockedAt: "2024-01-18",
+    effects: { memoryBonus: 10 }
+  },
+  {
+    id: "letter-writer",
+    name: "星际信使",
+    description: "传递跨越时空的思念",
+    icon: "✉️",
+    rarity: "common",
+    condition: "发送10封信",
+    unlocked: true,
+    unlockedAt: "2024-01-12",
+    effects: { expBonus: 8 }
+  },
+  {
+    id: "storyteller",
+    name: "故事编织者",
+    description: "共同创造无数精彩故事",
+    icon: "📝",
+    rarity: "rare",
+    condition: "完成5个故事接龙",
+    unlocked: true,
+    unlockedAt: "2024-01-16",
+    effects: { rareDropRate: 5 }
+  },
+  {
+    id: "legend-seeker",
+    name: "传说追寻者",
+    description: "追寻传说级宇宙的奥秘",
+    icon: "👑",
+    rarity: "epic",
+    condition: "完成5个传说级宇宙",
+    unlocked: false,
+    effects: { expBonus: 25, rareDropRate: 10 }
+  },
+  {
+    id: "galaxy-master",
+    name: "银河主宰",
+    description: "探索过半宇宙的伟大旅人",
+    icon: "⚡",
+    rarity: "epic",
+    condition: "完成50个宇宙",
+    unlocked: false,
+    effects: { expBonus: 30, memoryBonus: 15, rareDropRate: 10 }
+  },
+  {
+    id: "eternal-traveler",
+    name: "永恒旅人",
+    description: "连续旅行100天的传奇",
+    icon: "✨",
+    rarity: "legendary",
+    condition: "连续100天完成冒险",
+    unlocked: false,
+    effects: { expBonus: 50, memoryBonus: 25, rareDropRate: 20 }
+  },
+  {
+    id: "universe-conqueror",
+    name: "宇宙征服者",
+    description: "探索完所有宇宙的终极旅人",
+    icon: "🏆",
+    rarity: "legendary",
+    condition: "完成所有宇宙",
+    unlocked: false,
+    effects: { expBonus: 100, memoryBonus: 50, rareDropRate: 30 }
+  }
+];
+
+// 获取解锁的称号
+export const getUnlockedTitles = (): Title[] => {
+  return titles.filter(t => t.unlocked);
+};
+
+// 获取未解锁的称号
+export const getLockedTitles = (): Title[] => {
+  return titles.filter(t => !t.unlocked);
+};
+
+// 纪念品数据
+export const souvenirs: Souvenir[] = [
+  {
+    id: "souvenir-1",
+    name: "云端车票",
+    description: "来自云上列车的单程车票，上面印着金色的星空图案",
+    icon: "🎫",
+    rarity: "common",
+    universeId: "cloud-train",
+    universeName: "云上列车",
+    category: "document",
+    obtainedAt: "2024-01-15",
+    story: "这张车票见证了你们第一次共同选择的旅程"
+  },
+  {
+    id: "souvenir-2",
+    name: "龙鳞碎片",
+    description: "从远古巨龙身上脱落的金色鳞片，散发着温暖的光芒",
+    icon: "🐉",
+    rarity: "legendary",
+    universeId: "dragon-kingdom",
+    universeName: "龙眠王国",
+    category: "artifact",
+    obtainedAt: "2024-01-14",
+    story: "巨龙醒来时，这片鳞片轻轻落在了你的手心"
+  },
+  {
+    id: "souvenir-3",
+    name: "星辰书签",
+    description: "来自星辰图书馆的魔法书签，会在黑暗中发光",
+    icon: "🔖",
+    rarity: "epic",
+    universeId: "star-library",
+    universeName: "星辰图书馆",
+    category: "artifact",
+    obtainedAt: "2024-01-13",
+    story: "图书管理员送给你们的珍贵礼物"
+  },
+  {
+    id: "souvenir-4",
+    name: "星际邮票",
+    description: "来自银河邮局的特殊邮票，上面印着螺旋星系",
+    icon: "🪐",
+    rarity: "common",
+    universeId: "galaxy-post",
+    universeName: "银河邮局",
+    category: "document",
+    obtainedAt: "2024-01-12",
+    story: "你们寄出的第一封信上的邮票"
+  },
+  {
+    id: "souvenir-5",
+    name: "时间花瓣",
+    description: "永不凋谢的花朵，每一片花瓣都记录着一个瞬间",
+    icon: "🌸",
+    rarity: "rare",
+    universeId: "time-garden",
+    universeName: "时间花园",
+    category: "plant",
+    obtainedAt: "2024-01-11",
+    story: "时间花园中最珍贵的花朵"
+  },
+  {
+    id: "souvenir-6",
+    name: "海鸟羽毛",
+    description: "晨曦岛上海鸟掉落的羽毛，带着淡淡的海盐气息",
+    icon: "🪶",
+    rarity: "common",
+    universeId: "dawn-island",
+    universeName: "晨曦岛",
+    category: "creature",
+    obtainedAt: "2024-01-10",
+    story: "一只海鸟停在灯塔上时掉落的羽毛"
+  },
+  {
+    id: "souvenir-7",
+    name: "精灵水晶",
+    description: "迷雾森林中精灵赠送的发光水晶",
+    icon: "💎",
+    rarity: "rare",
+    universeId: "misty-forest",
+    universeName: "迷雾森林",
+    category: "crystal",
+    obtainedAt: "2024-01-09",
+    story: "友好的精灵送给你们的礼物"
+  },
+  {
+    id: "souvenir-8",
+    name: "翡翠星尘埃",
+    description: "来自翡翠星的绿色尘埃，在黑暗中会发出荧光",
+    icon: "🌍",
+    rarity: "legendary",
+    universeId: "space-port",
+    universeName: "太空港",
+    category: "crystal",
+    obtainedAt: "2024-01-08",
+    story: "飞船降落在翡翠星时收集的珍贵尘埃"
+  }
+];
+
+// 生成航线地图数据
+export const generateRouteMap = (): RouteMap => {
+  const universes = getAllUniverses();
+  const nodes: Record<string, RouteNode> = {};
+  
+  universes.forEach((universe, index) => {
+    const visited = memories.some(m => m.universeId === universe.id);
+    const unlocked = index < 18 || visited;
+    
+    // 创建连接关系
+    const connections: string[] = [];
+    const categoryUniverses = universes.filter(u => u.category === universe.category && u.id !== universe.id);
+    categoryUniverses.slice(0, 3).forEach(u => {
+      if (index % 3 === 0 || memories.some(m => m.universeId === u.id)) {
+        connections.push(u.id);
+      }
+    });
+    
+    // 添加跨类别连接
+    const otherCategories = universes.filter(u => u.category !== universe.category && u.id !== universe.id);
+    otherCategories.slice(0, 2).forEach(u => {
+      if (memories.some(m => m.universeId === u.id)) {
+        connections.push(u.id);
+      }
+    });
+    
+    nodes[universe.id] = {
+      universeId: universe.id,
+      unlocked,
+      visited,
+      connections: [...new Set(connections)],
+      requiredLevel: universe.rarity === "legendary" ? 10 : universe.rarity === "epic" ? 5 : undefined
+    };
+  });
+  
+  return {
+    nodes,
+    currentNode: "cloud-train",
+    totalNodes: universes.length,
+    unlockedNodes: Object.values(nodes).filter(n => n.unlocked).length,
+    visitedNodes: Object.values(nodes).filter(n => n.visited).length
+  };
+};
+
+// 完成宇宙获得经验值
+export const calculateExp = (universe: Universe, bonusMultiplier: number = 1): number => {
+  const rarityMultiplier = {
+    common: 1,
+    rare: 1.5,
+    epic: 2,
+    legendary: 3
+  };
+  
+  const baseExp = 100;
+  const exp = Math.floor(baseExp * rarityMultiplier[universe.rarity] * bonusMultiplier);
+  
+  return exp;
+};
+
+// AI生成宇宙接口（预留）
+export interface AIUniverseRequest {
+  prompt: string;
+  category?: Category;
+  rarity?: Rarity;
+  interactionType?: InteractionType;
+}
+
+export interface AIUniverseResponse {
+  success: boolean;
+  universe?: Universe;
+  error?: string;
+}
+
+export const generateUniverseWithAI = async (request: AIUniverseRequest): Promise<AIUniverseResponse> => {
+  // 预留接口 - 未来连接AI服务
+  return {
+    success: false,
+    error: "AI生成功能正在开发中"
+  };
 };

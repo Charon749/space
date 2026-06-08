@@ -4,10 +4,10 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Home, Sparkles, Archive, Map } from "lucide-react";
+import { Home, Sparkles, Archive, Map, Compass } from "lucide-react";
 
 const navItems = [
-  { href: "/", label: "首页", icon: Home },
+  { href: "/", label: "航线", icon: Compass },
   { href: "/today", label: "今日宇宙", icon: Sparkles },
   { href: "/archive", label: "宇宙档案", icon: Archive },
   { href: "/starmap", label: "记忆星图", icon: Map },
