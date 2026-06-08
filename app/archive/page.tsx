@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { getAllUniverses, type Universe } from "@/data/mockData";
+import { getAllUniverses, memories, type Universe } from "@/data/mockData";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Navigation } from "@/components/ui/navigation";
-import { Search, Star, Sparkles } from "lucide-react";
+import { Search, Star, Sparkles, X, Tag, Calendar } from "lucide-react";
 
 export default function ArchivePage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,13 +16,16 @@ export default function ArchivePage() {
   const filteredUniverses = universes.filter(
     (universe) =>
       universe.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      universe.type.toLowerCase().includes(searchQuery.toLowerCase())
+      universe.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      universe.keywords.some((k) => k.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
       case "legendary":
         return "text-yellow-400";
+      case "epic":
+        return "text-purple-400";
       case "rare":
         return "text-cosmic-blue";
       default:
@@ -34,6 +37,8 @@ export default function ArchivePage() {
     switch (rarity) {
       case "legendary":
         return "bg-yellow-400/10";
+      case "epic":
+        return "bg-purple-400/10";
       case "rare":
         return "bg-cosmic-blue/10";
       default:
@@ -45,11 +50,34 @@ export default function ArchivePage() {
     switch (rarity) {
       case "legendary":
         return "传说";
+      case "epic":
+        return "史诗";
       case "rare":
         return "稀有";
       default:
         return "普通";
     }
+  };
+
+  const getCategoryLabel = (category: string) => {
+    switch (category) {
+      case "fantasy":
+        return "奇幻";
+      case "scifi":
+        return "科幻";
+      case "healing":
+        return "治愈";
+      case "romance":
+        return "浪漫";
+      case "mystery":
+        return "神秘";
+      default:
+        return category;
+    }
+  };
+
+  const getUniverseMemory = (universeId: string) => {
+    return memories.find((m) => m.universeId === universeId);
   };
 
   return (
@@ -83,40 +111,48 @@ export default function ArchivePage() {
 
         {/* 宇宙列表 */}
         <div className="space-y-4">
-          {filteredUniverses.map((universe, index) => (
-            <button
-              key={universe.id}
-              onClick={() => setSelectedUniverse(universe)}
-              className="w-full text-left animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <Card className="p-4 bg-card/30 backdrop-blur-sm border-border/30 hover:border-cosmic-purple/30 transition-all duration-300">
-                <div className="flex items-center gap-4">
-                  <span className="text-3xl">{universe.icon}</span>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm font-light">{universe.name}</span>
-                      <span className={`text-xs px-1.5 py-0.5 rounded-full ${getRarityBg(universe.rarity)} ${getRarityColor(universe.rarity)}`}>
-                        {getRarityLabel(universe.rarity)}
-                      </span>
+          {filteredUniverses.map((universe, index) => {
+            const memory = getUniverseMemory(universe.id);
+            return (
+              <button
+                key={universe.id}
+                onClick={() => setSelectedUniverse(universe)}
+                className="w-full text-left animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <Card className="p-4 bg-card/30 backdrop-blur-sm border-border/30 hover:border-cosmic-purple/30 transition-all duration-300">
+                  <div className="flex items-center gap-4">
+                    <span className="text-3xl">{universe.icon}</span>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-light">{universe.name}</span>
+                        <span className={`text-xs px-1.5 py-0.5 rounded-full ${getRarityBg(universe.rarity)} ${getRarityColor(universe.rarity)}`}>
+                          {getRarityLabel(universe.rarity)}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3 text-xs font-light text-muted">
+                        <span>{getCategoryLabel(universe.category)}</span>
+                        <span>·</span>
+                        <span>{universe.interactionTitle}</span>
+                        {memory && (
+                          <>
+                            <span>·</span>
+                            <span className="text-cosmic-purple flex items-center gap-1">
+                              <Star className="w-3 h-3" fill="currentColor" />
+                              已完成
+                            </span>
+                          </>
+                        )}
+                      </div>
                     </div>
-                    <div className="flex items-center gap-3 text-xs font-light text-muted">
-                      <span>{universe.date}</span>
-                      <span>·</span>
-                      <span>{universe.type}</span>
-                      <span>·</span>
-                      <span className={universe.completed ? "text-cosmic-purple" : "text-muted/50"}>
-                        {universe.completed ? "已完成" : "未完成"}
-                      </span>
-                    </div>
+                    {memory && (
+                      <Star className="w-4 h-4 text-cosmic-purple" fill="currentColor" />
+                    )}
                   </div>
-                  {universe.completed && (
-                    <Star className="w-4 h-4 text-cosmic-purple" fill="currentColor" />
-                  )}
-                </div>
-              </Card>
-            </button>
-          ))}
+                </Card>
+              </button>
+            );
+          })}
         </div>
 
         {/* 如果没有搜索结果 */}
@@ -136,7 +172,7 @@ export default function ArchivePage() {
           onClick={() => setSelectedUniverse(null)}
         >
           <Card
-            className="w-full max-w-sm p-6 bg-card/90 backdrop-blur-md border-cosmic-purple/30 animate-fade-in-up"
+            className="w-full max-w-sm p-6 bg-card/90 backdrop-blur-md border-cosmic-purple/30 animate-fade-in-up max-h-[80vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* 头部 */}
@@ -145,19 +181,44 @@ export default function ArchivePage() {
                 <span className="text-4xl">{selectedUniverse.icon}</span>
                 <div>
                   <span className={`text-xs font-light px-2 py-1 rounded-full ${getRarityBg(selectedUniverse.rarity)} ${getRarityColor(selectedUniverse.rarity)} mb-1 block`}>
-                    #{String(selectedUniverse.id).padStart(3, "0")} · {selectedUniverse.type}
+                    {getRarityLabel(selectedUniverse.rarity)} · {getCategoryLabel(selectedUniverse.category)}
                   </span>
                   <h3 className="text-xl font-light">{selectedUniverse.name}</h3>
+                  <p className="text-xs font-light text-muted">{selectedUniverse.title}</p>
                 </div>
               </div>
+              <button
+                onClick={() => setSelectedUniverse(null)}
+                className="text-muted hover:text-foreground transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
             </div>
 
             {/* 世界观 */}
             <div className="mb-6">
               <div className="text-xs font-light text-cosmic-purple mb-2">世界观</div>
               <p className="text-sm font-light text-muted leading-relaxed">
-                {selectedUniverse.worldView}
+                {selectedUniverse.description}
               </p>
+            </div>
+
+            {/* 角色身份 */}
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              <div className="p-3 rounded-lg bg-card/50 border border-border/30">
+                <div className="text-xs font-light text-muted mb-1">你的身份</div>
+                <div className="text-sm font-light">{selectedUniverse.yourRole}</div>
+                <div className="text-xs font-light text-muted mt-1">
+                  {selectedUniverse.yourRoleDescription}
+                </div>
+              </div>
+              <div className="p-3 rounded-lg bg-card/50 border border-border/30">
+                <div className="text-xs font-light text-muted mb-1">旅伴身份</div>
+                <div className="text-sm font-light">{selectedUniverse.partnerRole}</div>
+                <div className="text-xs font-light text-muted mt-1">
+                  {selectedUniverse.partnerRoleDescription}
+                </div>
+              </div>
             </div>
 
             {/* 互动类型 */}
@@ -166,22 +227,44 @@ export default function ArchivePage() {
                 <Sparkles className="w-4 h-4 text-cosmic-purple" />
                 <span>互动方式</span>
               </div>
-              <div className="text-sm font-light">{selectedUniverse.interaction.title}</div>
+              <div className="text-sm font-light">{selectedUniverse.interactionTitle}</div>
               <p className="text-xs font-light text-muted mt-1">
-                {selectedUniverse.interaction.description}
+                {selectedUniverse.interactionDescription}
               </p>
             </div>
 
+            {/* 关键词 */}
+            <div className="flex items-center gap-2 text-xs font-light text-muted mb-6">
+              <Tag className="w-3 h-3" />
+              <div className="flex flex-wrap gap-1">
+                {selectedUniverse.keywords.map((keyword) => (
+                  <span
+                    key={keyword}
+                    className="px-1.5 py-0.5 rounded-full bg-cosmic-purple/10 text-cosmic-purple"
+                  >
+                    {keyword}
+                  </span>
+                ))}
+              </div>
+            </div>
+
             {/* 记忆 */}
-            {selectedUniverse.memory && (
+            {getUniverseMemory(selectedUniverse.id) && (
               <div className="mt-6 pt-4 border-t border-border/30">
-                <div className="text-xs font-light text-cosmic-purple mb-2">共同记忆</div>
-                <h4 className="text-sm font-light mb-2">{selectedUniverse.memory.title}</h4>
+                <div className="flex items-center gap-2 text-xs font-light text-cosmic-purple mb-2">
+                  <Star className="w-3 h-3" fill="currentColor" />
+                  <span>共同记忆</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs font-light text-muted mb-2">
+                  <Calendar className="w-3 h-3" />
+                  <span>{getUniverseMemory(selectedUniverse.id)?.timestamp}</span>
+                </div>
+                <h4 className="text-sm font-light mb-2">{getUniverseMemory(selectedUniverse.id)?.title}</h4>
                 <p className="text-xs font-light text-muted leading-relaxed">
-                  {selectedUniverse.memory.description}
+                  {getUniverseMemory(selectedUniverse.id)?.description}
                 </p>
                 <div className="flex flex-wrap gap-1 mt-3">
-                  {selectedUniverse.memory.keywords.map((keyword) => (
+                  {getUniverseMemory(selectedUniverse.id)?.keywords.map((keyword) => (
                     <span
                       key={keyword}
                       className="text-xs font-light px-1.5 py-0.5 rounded-full bg-cosmic-purple/10 text-cosmic-purple"
@@ -189,22 +272,6 @@ export default function ArchivePage() {
                       {keyword}
                     </span>
                   ))}
-                </div>
-              </div>
-            )}
-
-            {/* 收藏品 */}
-            {selectedUniverse.collectibles && (
-              <div className="mt-4 pt-4 border-t border-border/30">
-                <div className="text-xs font-light text-muted mb-2">获得收藏品</div>
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl">{selectedUniverse.collectibles[0].icon}</span>
-                  <div>
-                    <div className="text-sm font-light">{selectedUniverse.collectibles[0].name}</div>
-                    <div className="text-xs font-light text-muted">
-                      {selectedUniverse.collectibles[0].description}
-                    </div>
-                  </div>
                 </div>
               </div>
             )}

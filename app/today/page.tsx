@@ -1,51 +1,40 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { getTodayUniverse, travelers } from "@/data/mockData";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Navigation } from "@/components/ui/navigation";
-import { ArrowLeft, Star, Sparkles, Check, Users } from "lucide-react";
+import { ArrowLeft, Sparkles, Star, Share2 } from "lucide-react";
+import {
+  ChoiceMission,
+  LetterMission,
+  StoryMission,
+  MemoryMission,
+  WishMission,
+  GiftMission,
+  PhotoMission,
+  QuestionMission,
+} from "@/components/missions";
 
 export default function TodayPage() {
   const universe = getTodayUniverse();
-  const [myRole, setMyRole] = useState(universe.roles[0]);
-  const [partnerRole, setPartnerRole] = useState(universe.roles[1]);
-  const [myInput, setMyInput] = useState("");
-  const [partnerInput, setPartnerInput] = useState("");
-  const [myChoice, setMyChoice] = useState<string | null>(null);
-  const [partnerChoice, setPartnerChoice] = useState<string | null>(null);
   const [isCompleted, setIsCompleted] = useState(false);
   const [showMemory, setShowMemory] = useState(false);
-  const [step, setStep] = useState(1);
+  const [resultData, setResultData] = useState<string>("");
 
-  // 随机分配角色
-  useEffect(() => {
-    const shuffled = [...universe.roles].sort(() => Math.random() - 0.5);
-    setMyRole(shuffled[0]);
-    setPartnerRole(shuffled[1]);
-  }, [universe.roles]);
-
-  const handleSubmit = () => {
-    if (universe.interaction.type === "decision") {
-      if (myChoice && partnerChoice) {
-        setIsCompleted(true);
-        setTimeout(() => setShowMemory(true), 1500);
-      }
-    } else {
-      if (myInput.trim()) {
-        setIsCompleted(true);
-        setTimeout(() => setShowMemory(true), 1500);
-      }
-    }
+  const handleMissionComplete = (data: string) => {
+    setResultData(data);
+    setIsCompleted(true);
+    setTimeout(() => setShowMemory(true), 1500);
   };
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
       case "legendary":
         return "text-yellow-400 border-yellow-400/30";
+      case "epic":
+        return "text-purple-400 border-purple-400/30";
       case "rare":
         return "text-cosmic-blue border-cosmic-blue/30";
       default:
@@ -57,6 +46,8 @@ export default function TodayPage() {
     switch (rarity) {
       case "legendary":
         return "bg-yellow-400/10";
+      case "epic":
+        return "bg-purple-400/10";
       case "rare":
         return "bg-cosmic-blue/10";
       default:
@@ -64,225 +55,73 @@ export default function TodayPage() {
     }
   };
 
-  const generatedMemory = {
-    title: `${universe.name}记忆`,
-    description: `在${universe.name}的世界里，你们共同经历了一段独特的冒险。作为${myRole.name}和${partnerRole.name}，你们${universe.interaction.type === 'decision' ? '一起做出了重要的选择' : '携手创造了美好的回忆'}。这段经历将永远铭刻在你们的星图之中。`,
-    keywords: [universe.name, myRole.name, partnerRole.name, "冒险"]
+  const getRarityLabel = (rarity: string) => {
+    switch (rarity) {
+      case "legendary":
+        return "传说";
+      case "epic":
+        return "史诗";
+      case "rare":
+        return "稀有";
+      default:
+        return "普通";
+    }
   };
 
-  // 渲染不同类型的互动组件
-  const renderInteraction = () => {
-    switch (universe.interaction.type) {
-      case "decision":
-        return (
-          <div className="space-y-4">
-            <p className="text-muted text-sm font-light mb-4">{universe.interaction.prompt}</p>
-            <div className="grid grid-cols-1 gap-3">
-              {universe.interaction.options?.map((option) => (
-                <button
-                  key={option.id}
-                  onClick={() => setMyChoice(option.id)}
-                  className={`p-4 rounded-lg border transition-all duration-300 text-left ${
-                    myChoice === option.id
-                      ? "border-cosmic-purple bg-cosmic-purple/10"
-                      : "border-border/50 bg-card/30 hover:border-cosmic-purple/30"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-xl">{option.icon}</span>
-                    <div className="flex-1">
-                      <div className="text-sm font-light">{option.text}</div>
-                      {option.effect && (
-                        <div className="text-xs font-light text-muted mt-1">
-                          {option.effect}
-                        </div>
-                      )}
-                    </div>
-                    {myChoice === option.id && (
-                      <Check className="w-5 h-5 text-cosmic-purple" />
-                    )}
-                  </div>
-                </button>
-              ))}
-            </div>
+  const getCategoryLabel = (category: string) => {
+    switch (category) {
+      case "fantasy":
+        return "奇幻";
+      case "scifi":
+        return "科幻";
+      case "healing":
+        return "治愈";
+      case "romance":
+        return "浪漫";
+      case "mystery":
+        return "神秘";
+      default:
+        return category;
+    }
+  };
 
-            {/* 显示对方选择状态 */}
-            <div className="mt-4 p-4 rounded-lg bg-card/30 border border-border/50">
-              <div className="flex items-center gap-2 text-muted text-xs font-light">
-                <Users className="w-4 h-4" />
-                <span>等待旅伴做出选择...</span>
-              </div>
-            </div>
-          </div>
-        );
+  const generatedMemory = {
+    title: `${universe.name}记忆`,
+    description: universe.memorySummary,
+    keywords: universe.keywords,
+  };
 
-      case "co-create":
-        return (
-          <div className="space-y-4">
-            <p className="text-muted text-sm font-light mb-4">{universe.interaction.prompt}</p>
-            <Textarea
-              placeholder="写下你的回忆..."
-              value={myInput}
-              onChange={(e) => setMyInput(e.target.value)}
-              className="min-h-[150px]"
-            />
-            
-            {/* 规则提示 */}
-            <div className="mt-4 p-3 rounded-lg bg-cosmic-purple/5 border border-cosmic-purple/20">
-              <div className="text-cosmic-purple text-xs font-light mb-2">互动规则</div>
-              <ul className="text-xs font-light text-muted space-y-1">
-                {universe.interaction.rules?.map((rule, index) => (
-                  <li key={index}>• {rule}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        );
-
-      case "story-chain":
-        return (
-          <div className="space-y-4">
-            <p className="text-muted text-sm font-light mb-4">{universe.interaction.prompt}</p>
-            <Textarea
-              placeholder="续写你们的故事..."
-              value={myInput}
-              onChange={(e) => setMyInput(e.target.value)}
-              className="min-h-[100px]"
-            />
-            <div className="text-xs font-light text-muted">
-              提示：每人最多写三句话
-            </div>
-          </div>
-        );
-
-      case "emoji":
-        return (
-          <div className="space-y-4">
-            <p className="text-muted text-sm font-light mb-4">{universe.interaction.prompt}</p>
-            <div className="grid grid-cols-3 gap-3">
-              {universe.interaction.options?.map((option) => (
-                <button
-                  key={option.id}
-                  onClick={() => setMyChoice(option.id)}
-                  className={`p-4 rounded-lg border transition-all duration-300 ${
-                    myChoice === option.id
-                      ? "border-cosmic-purple bg-cosmic-purple/10"
-                      : "border-border/50 bg-card/30 hover:border-cosmic-purple/30"
-                  }`}
-                >
-                  <div className="text-center">
-                    <div className="text-3xl mb-2">{option.icon}</div>
-                    <div className="text-xs font-light">{option.text}</div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        );
-
-      case "collection":
-        return (
-          <div className="space-y-4">
-            <p className="text-muted text-sm font-light mb-4">{universe.interaction.prompt}</p>
-            <div className="grid grid-cols-2 gap-3">
-              {universe.interaction.options?.map((option) => (
-                <button
-                  key={option.id}
-                  onClick={() => setMyChoice(option.id)}
-                  className={`p-4 rounded-lg border transition-all duration-300 text-left ${
-                    myChoice === option.id
-                      ? "border-cosmic-purple bg-cosmic-purple/10"
-                      : "border-border/50 bg-card/30 hover:border-cosmic-purple/30"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">{option.icon}</span>
-                    <div>
-                      <div className="text-sm font-light">{option.text}</div>
-                      {option.effect && (
-                        <div className="text-xs font-light text-muted">{option.effect}</div>
-                      )}
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        );
-
-      case "time-capsule":
-        return (
-          <div className="space-y-4">
-            <p className="text-muted text-sm font-light mb-4">{universe.interaction.prompt}</p>
-            <Textarea
-              placeholder="写给一年后的对方..."
-              value={myInput}
-              onChange={(e) => setMyInput(e.target.value)}
-              className="min-h-[150px]"
-            />
-            <div className="text-xs font-light text-muted">
-              提示：信件将在一年后自动开启
-            </div>
-          </div>
-        );
-
-      case "image-upload":
-        return (
-          <div className="space-y-4">
-            <p className="text-muted text-sm font-light mb-4">{universe.interaction.prompt}</p>
-            <div className="border-2 border-dashed border-border/50 rounded-lg p-8 text-center hover:border-cosmic-purple/30 transition-colors cursor-pointer">
-              <div className="text-cosmic-purple mb-2">📷</div>
-              <div className="text-sm font-light">点击上传图片</div>
-              <div className="text-xs font-light text-muted mt-1">支持 JPG、PNG 格式</div>
-            </div>
-          </div>
-        );
-
-      case "random-event":
-        return (
-          <div className="space-y-4">
-            <div className="p-6 rounded-lg bg-card/50 border border-cosmic-purple/20">
-              <div className="text-cosmic-purple text-lg mb-3 animate-breathe">✨</div>
-              <p className="text-sm font-light leading-relaxed">{universe.interaction.prompt}</p>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                onClick={() => setMyChoice("explore")}
-                className={`p-4 rounded-lg border transition-all duration-300 ${
-                  myChoice === "explore"
-                    ? "border-cosmic-purple bg-cosmic-purple/10"
-                    : "border-border/50 bg-card/30 hover:border-cosmic-purple/30"
-                }`}
-              >
-                <div className="text-xl mb-2">🚪</div>
-                <div className="text-sm font-light">进入探索</div>
-              </button>
-              <button
-                onClick={() => setMyChoice("wait")}
-                className={`p-4 rounded-lg border transition-all duration-300 ${
-                  myChoice === "wait"
-                    ? "border-cosmic-purple bg-cosmic-purple/10"
-                    : "border-border/50 bg-card/30 hover:border-cosmic-purple/30"
-                }`}
-              >
-                <div className="text-xl mb-2">⏳</div>
-                <div className="text-sm font-light">等待观察</div>
-              </button>
-            </div>
-          </div>
-        );
-
+  const renderMission = () => {
+    switch (universe.interactionType) {
+      case "choice":
+        return <ChoiceMission universe={universe} onComplete={handleMissionComplete} />;
+      case "letter":
+        return <LetterMission universe={universe} onComplete={handleMissionComplete} />;
+      case "story":
+        return <StoryMission universe={universe} onComplete={handleMissionComplete} />;
+      case "memory":
+        return <MemoryMission universe={universe} onComplete={handleMissionComplete} />;
+      case "wish":
+        return <WishMission universe={universe} onComplete={handleMissionComplete} />;
+      case "gift":
+        return <GiftMission universe={universe} onComplete={handleMissionComplete} />;
+      case "photo":
+        return <PhotoMission universe={universe} onComplete={handleMissionComplete} />;
+      case "question":
+        return <QuestionMission universe={universe} onComplete={handleMissionComplete} />;
       default:
         return (
-          <div className="text-muted text-sm font-light">
-            该互动类型正在开发中...
+          <div className="text-center py-8">
+            <div className="text-muted text-sm font-light">
+              该互动类型正在开发中...
+            </div>
           </div>
         );
     }
   };
 
   return (
-    <main className="min-h-screen bg-background pb-20">
+    <main className={`min-h-screen pb-20 ${universe.backgroundClass}`}>
       {/* 背景装饰 */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-cosmic-purple/5 rounded-full blur-3xl" />
@@ -306,10 +145,16 @@ export default function TodayPage() {
               <div className="flex items-center gap-4 mb-4">
                 <span className="text-5xl">{universe.icon}</span>
                 <div>
-                  <span className={`text-xs font-light px-2 py-1 rounded-full ${getRarityBg(universe.rarity)} ${getRarityColor(universe.rarity)} mb-2 block`}>
-                    #{String(universe.id).padStart(3, "0")} · {universe.type}宇宙
-                  </span>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className={`text-xs font-light px-2 py-1 rounded-full ${getRarityBg(universe.rarity)} ${getRarityColor(universe.rarity)}`}>
+                      {getRarityLabel(universe.rarity)}
+                    </span>
+                    <span className="text-xs font-light text-muted">
+                      {getCategoryLabel(universe.category)}宇宙
+                    </span>
+                  </div>
                   <h1 className="text-2xl font-light">{universe.name}</h1>
+                  <p className="text-xs font-light text-muted">{universe.title}</p>
                 </div>
               </div>
 
@@ -317,7 +162,7 @@ export default function TodayPage() {
               <Card className="p-5 bg-card/30 backdrop-blur-sm border-border/30">
                 <div className="text-xs font-light text-cosmic-purple mb-2">世界观</div>
                 <p className="text-muted text-sm font-light leading-relaxed">
-                  {universe.worldView}
+                  {universe.description}
                 </p>
               </Card>
             </section>
@@ -328,18 +173,18 @@ export default function TodayPage() {
               <div className="grid grid-cols-2 gap-4">
                 <Card className="p-4 bg-card/30 backdrop-blur-sm border-border/30">
                   <div className="text-xs font-light text-muted mb-2">你的身份</div>
-                  <div className="text-2xl mb-2">{myRole.icon}</div>
-                  <div className="text-sm font-light">{myRole.name}</div>
+                  <div className="text-2xl mb-2">👤</div>
+                  <div className="text-sm font-light">{universe.yourRole}</div>
                   <div className="text-xs font-light text-muted mt-1">
-                    {myRole.description}
+                    {universe.yourRoleDescription}
                   </div>
                 </Card>
                 <Card className="p-4 bg-card/30 backdrop-blur-sm border-border/30">
                   <div className="text-xs font-light text-muted mb-2">旅伴身份</div>
-                  <div className="text-2xl mb-2">{partnerRole.icon}</div>
-                  <div className="text-sm font-light">{partnerRole.name}</div>
+                  <div className="text-2xl mb-2">👤</div>
+                  <div className="text-sm font-light">{universe.partnerRole}</div>
                   <div className="text-xs font-light text-muted mt-1">
-                    {partnerRole.description}
+                    {universe.partnerRoleDescription}
                   </div>
                 </Card>
               </div>
@@ -350,25 +195,13 @@ export default function TodayPage() {
               <Card className="p-6 bg-card/50 backdrop-blur-sm border-cosmic-purple/20">
                 <div className="flex items-center gap-2 mb-4">
                   <Sparkles className="w-4 h-4 text-cosmic-purple" />
-                  <h3 className="text-sm font-light">{universe.interaction.title}</h3>
+                  <h3 className="text-sm font-light">{universe.interactionTitle}</h3>
                 </div>
                 <p className="text-muted text-xs font-light mb-6">
-                  {universe.interaction.description}
+                  {universe.interactionDescription}
                 </p>
 
-                {renderInteraction()}
-
-                <Button
-                  onClick={handleSubmit}
-                  disabled={
-                    (universe.interaction.type === "decision" && !myChoice) ||
-                    (["co-create", "story-chain", "time-capsule"].includes(universe.interaction.type) && !myInput.trim()) ||
-                    (["emoji", "collection", "random-event"].includes(universe.interaction.type) && !myChoice)
-                  }
-                  className="w-full mt-6"
-                >
-                  完成冒险
-                </Button>
+                {renderMission()}
               </Card>
             </section>
           </>
@@ -376,9 +209,11 @@ export default function TodayPage() {
           /* 完成后的记忆展示 */
           <section className="animate-fade-in">
             {showMemory ? (
-              <Card className="p-6 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm border-cosmic-purple/30">
+              <Card className="p-6 bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-md border-cosmic-purple/30">
                 <div className="text-center mb-6">
-                  <div className="text-cosmic-purple text-4xl mb-4 animate-breathe">✦</div>
+                  <div className={`text-4xl mb-4 animate-breathe ${getRarityColor(universe.rarity)}`}>
+                    {universe.icon}
+                  </div>
                   <h2 className="text-xl font-light mb-2">{generatedMemory.title}</h2>
                 </div>
 
@@ -398,28 +233,50 @@ export default function TodayPage() {
                   ))}
                 </div>
 
-                {/* 获得的收藏品 */}
-                {universe.collectibles && (
-                  <div className="mt-4 pt-4 border-t border-border/30">
-                    <div className="flex items-center gap-3">
-                      <div className="text-3xl">{universe.collectibles[0].icon}</div>
-                      <div>
-                        <div className="text-sm font-light">{universe.collectibles[0].name}</div>
-                        <div className="text-xs font-light text-muted">
-                          {universe.collectibles[0].description}
-                        </div>
+                {/* 获得的星星 */}
+                <div className="mt-4 pt-4 border-t border-border/30">
+                  <div className="flex items-center justify-center gap-3">
+                    <div
+                      className={`text-3xl ${
+                        universe.rarity === "legendary"
+                          ? "text-yellow-400"
+                          : universe.rarity === "epic"
+                          ? "text-purple-400"
+                          : universe.rarity === "rare"
+                          ? "text-cosmic-blue"
+                          : "text-cosmic-purple"
+                      }`}
+                    >
+                      ⭐
+                    </div>
+                    <div>
+                      <div className="text-sm font-light">获得星星</div>
+                      <div className="text-xs font-light text-muted">
+                        {getRarityLabel(universe.rarity)}级星星已添加到星图
                       </div>
                     </div>
                   </div>
-                )}
+                </div>
 
-                <Link href="/">
-                  <Button className="w-full mt-6">返回首页</Button>
-                </Link>
+                <div className="flex gap-3 mt-6">
+                  <Link href="/">
+                    <button className="flex-1 py-3 px-4 rounded-xl bg-card/50 border border-border/30 text-sm font-light hover:bg-card/70 transition-colors">
+                      返回首页
+                    </button>
+                  </Link>
+                  <Link href="/starmap">
+                    <button className="flex-1 py-3 px-4 rounded-xl bg-cosmic-purple/20 border border-cosmic-purple/30 text-sm font-light text-cosmic-purple hover:bg-cosmic-purple/30 transition-colors">
+                      <Star className="w-4 h-4 inline mr-1" />
+                      查看星图
+                    </button>
+                  </Link>
+                </div>
               </Card>
             ) : (
               <div className="text-center py-12">
-                <div className="text-cosmic-purple text-4xl mb-4 animate-breathe">✨</div>
+                <div className={`text-4xl mb-4 animate-breathe ${getRarityColor(universe.rarity)}`}>
+                  ✨
+                </div>
                 <p className="text-sm font-light">正在生成共同记忆...</p>
               </div>
             )}
