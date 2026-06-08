@@ -1,0 +1,142 @@
+[
+  {
+    "id": "relationship-001",
+    "name": "恋人",
+    "icon": "💕",
+    "description": "深爱彼此，共同面对一切挑战。",
+    "rarity": "common"
+  },
+  {
+    "id": "relationship-002",
+    "name": "夫妻",
+    "icon": "💍",
+    "description": "已经结为连理，承诺相伴一生。",
+    "rarity": "common"
+  },
+  {
+    "id": "relationship-003",
+    "name": "青梅竹马",
+    "icon": "🌸",
+    "description": "从小一起长大的伙伴，彼此了解。",
+    "rarity": "common"
+  },
+  {
+    "id": "relationship-004",
+    "name": "知己",
+    "icon": "🤝",
+    "description": "灵魂伴侣，能够理解彼此的内心。",
+    "rarity": "rare"
+  },
+  {
+    "id": "relationship-005",
+    "name": "宿敌",
+    "icon": "⚔️",
+    "description": "曾经的对手，现在成为伙伴。",
+    "rarity": "rare"
+  },
+  {
+    "id": "relationship-006",
+    "name": "师徒",
+    "icon": "🎓",
+    "description": "一方教导另一方，传承知识和技能。",
+    "rarity": "common"
+  },
+  {
+    "id": "relationship-007",
+    "name": "搭档",
+    "icon": "🤝",
+    "description": "共同工作的伙伴，彼此信任。",
+    "rarity": "common"
+  },
+  {
+    "id": "relationship-008",
+    "name": "守护者",
+    "icon": "🛡️",
+    "description": "一方保护另一方，承诺守护。",
+    "rarity": "rare"
+  },
+  {
+    "id": "relationship-009",
+    "name": "被守护者",
+    "icon": "🌟",
+    "description": "被另一方保护，感到安心。",
+    "rarity": "rare"
+  },
+  {
+    "id": "relationship-010",
+    "name": "灵魂伴侣",
+    "icon": "💫",
+    "description": "命中注定的一对，灵魂相连。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "relationship-011",
+    "name": "双生灵魂",
+    "icon": "👥",
+    "description": "来自同一个灵魂的两个存在，彼此感应。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "relationship-012",
+    "name": "前世恋人",
+    "icon": "🔄",
+    "description": "在前世相爱，今生再次相遇。",
+    "rarity": "epic"
+  },
+  {
+    "id": "relationship-013",
+    "name": "星际盟友",
+    "icon": "🌌",
+    "description": "来自不同星球的盟友，共同守护宇宙。",
+    "rarity": "rare"
+  },
+  {
+    "id": "relationship-014",
+    "name": "时空旅伴",
+    "icon": "⏰",
+    "description": "一起穿越时空的伙伴，经历无数冒险。",
+    "rarity": "epic"
+  },
+  {
+    "id": "relationship-015",
+    "name": "命运共同体",
+    "icon": "🔗",
+    "description": "命运紧密相连，一荣俱荣，一损俱损。",
+    "rarity": "epic"
+  },
+  {
+    "id": "relationship-016",
+    "name": "心灵感应者",
+    "icon": "🧠",
+    "description": "能够直接感知彼此的思想和情感。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "relationship-017",
+    "name": "契约伙伴",
+    "icon": "📜",
+    "description": "通过契约结成的伙伴关系，彼此承诺。",
+    "rarity": "rare"
+  },
+  {
+    "id": "relationship-018",
+    "name": "灵魂绑定",
+    "icon": "💞",
+    "description": "灵魂被魔法绑定，永远无法分离。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "relationship-019",
+    "name": "命运之敌",
+    "icon": "💔",
+    "description": "命运安排的敌人，最终成为恋人。",
+    "rarity": "epic"
+  },
+  {
+    "id": "relationship-020",
+    "name": "永恒伴侣",
+    "icon": "♾️",
+    "description": "超越时间和空间的爱，永恒不变。",
+    "rarity": "legendary"
+  }
+]

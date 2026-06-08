@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { 
   travelers, 
-  getTodayUniverse, 
   generateRouteMap, 
   souvenirs,
   getUnlockedTitles,
   type RouteMap
 } from "@/data/mockData";
+import { 
+  getTodayUniverse as getGeneratedUniverse,
+  type GeneratedUniverse
+} from "@/data/universeGenerator";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/ui/navigation";
@@ -22,17 +25,23 @@ import {
   Briefcase, 
   Crown,
   MapPin,
-  Zap
+  Zap,
+  Heart,
+  Palette,
+  BookOpen
 } from "lucide-react";
 
 export default function Home() {
-  const todayUniverse = getTodayUniverse();
   const [routeMap, setRouteMap] = useState<RouteMap | null>(null);
+  const [generatedUniverse, setGeneratedUniverse] = useState<GeneratedUniverse | null>(null);
   const unlockedTitles = getUnlockedTitles();
 
   useEffect(() => {
     const map = generateRouteMap();
     setRouteMap(map);
+    
+    const universe = getGeneratedUniverse();
+    setGeneratedUniverse(universe);
   }, []);
 
   const getRarityColor = (rarity: string) => {
@@ -91,8 +100,18 @@ export default function Home() {
     }
   };
 
+  if (!generatedUniverse) {
+    return (
+      <main className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-muted text-sm">生成今日宇宙中...</div>
+      </main>
+    );
+  }
+
+  const { world, travelerASpecies, travelerBSpecies, relationship, style, storyBackground } = generatedUniverse;
+
   return (
-    <main className={`min-h-screen pb-20 ${todayUniverse.backgroundClass}`}>
+    <main className={`min-h-screen pb-20 ${style.backgroundClass}`}>
       {/* 动态背景装饰 */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cosmic-purple/5 rounded-full blur-3xl" />
@@ -131,27 +150,23 @@ export default function Home() {
             
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-3">
-                <span className={`text-xs font-light px-2 py-1 rounded-full ${getRarityBg(todayUniverse.rarity)} ${getRarityColor(todayUniverse.rarity)}`}>
-                  {getRarityLabel(todayUniverse.rarity)}
+                <span className={`text-xs font-light px-2 py-1 rounded-full ${getRarityBg(world.rarity)} ${getRarityColor(world.rarity)}`}>
+                  {getRarityLabel(world.rarity)}
                 </span>
                 <span className="text-xs font-light text-muted">今日宇宙</span>
               </div>
 
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-4xl animate-breathe">{todayUniverse.icon}</span>
+                <span className="text-4xl animate-breathe">{world.icon}</span>
                 <div>
-                  <h2 className="text-xl font-light">{todayUniverse.name}</h2>
-                  <p className="text-xs font-light text-muted">{todayUniverse.title}</p>
+                  <h2 className="text-xl font-light">{world.name}</h2>
+                  <p className="text-xs font-light text-muted">{getCategoryLabel(world.category)}</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 mb-4 p-3 rounded-lg bg-cosmic-purple/5 border border-cosmic-purple/10">
-                <Sparkles className="w-4 h-4 text-cosmic-purple" />
-                <div className="flex-1">
-                  <div className="text-sm font-light">{todayUniverse.interactionTitle}</div>
-                  <div className="text-xs font-light text-muted">{todayUniverse.interactionDescription}</div>
-                </div>
-              </div>
+              <p className="text-muted text-sm font-light leading-relaxed mb-4">
+                {world.description}
+              </p>
 
               <Link href="/today">
                 <Button className="w-full group bg-gradient-to-r from-cosmic-purple/20 to-cosmic-blue/20 hover:from-cosmic-purple/30 hover:to-cosmic-blue/30 border-cosmic-purple/40">
@@ -159,6 +174,76 @@ export default function Home() {
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
+            </div>
+          </Card>
+        </section>
+
+        {/* 旅人形态 */}
+        <section className="mb-6 animate-fade-in-up">
+          <Card className="p-5 bg-card/30 backdrop-blur-sm border-border/30">
+            <div className="flex items-center gap-2 mb-4">
+              <Heart className="w-4 h-4 text-cosmic-purple" />
+              <h3 className="text-sm font-light">今日旅人形态</h3>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center p-4 rounded-lg bg-card/50">
+                <div className="text-4xl mb-2">{travelerASpecies.icon}</div>
+                <div className="text-sm font-light mb-1">{travelerASpecies.name}</div>
+                <div className={`text-xs font-light px-2 py-1 rounded-full ${getRarityBg(travelerASpecies.rarity)} ${getRarityColor(travelerASpecies.rarity)}`}>
+                  {getRarityLabel(travelerASpecies.rarity)}
+                </div>
+              </div>
+              <div className="text-center p-4 rounded-lg bg-card/50">
+                <div className="text-4xl mb-2">{travelerBSpecies.icon}</div>
+                <div className="text-sm font-light mb-1">{travelerBSpecies.name}</div>
+                <div className={`text-xs font-light px-2 py-1 rounded-full ${getRarityBg(travelerBSpecies.rarity)} ${getRarityColor(travelerBSpecies.rarity)}`}>
+                  {getRarityLabel(travelerBSpecies.rarity)}
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 text-center p-3 rounded-lg bg-cosmic-purple/5 border border-cosmic-purple/10">
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <span className="text-2xl">{relationship.icon}</span>
+                <span className="text-sm font-light">{relationship.name}</span>
+              </div>
+              <p className="text-xs font-light text-muted">{relationship.description}</p>
+            </div>
+          </Card>
+        </section>
+
+        {/* 故事背景 */}
+        <section className="mb-6 animate-fade-in-delay-1">
+          <Card className="p-5 bg-card/30 backdrop-blur-sm border-border/30">
+            <div className="flex items-center gap-2 mb-4">
+              <BookOpen className="w-4 h-4 text-cosmic-blue" />
+              <h3 className="text-sm font-light">今日故事背景</h3>
+            </div>
+
+            <p className="text-muted text-sm font-light leading-relaxed">
+              {storyBackground}
+            </p>
+          </Card>
+        </section>
+
+        {/* 画风展示 */}
+        <section className="mb-6 animate-fade-in-delay-1">
+          <Card className="p-5 bg-card/30 backdrop-blur-sm border-border/30">
+            <div className="flex items-center gap-2 mb-4">
+              <Palette className="w-4 h-4 text-cosmic-purple" />
+              <h3 className="text-sm font-light">今日画风</h3>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <div className="text-4xl">{style.icon}</div>
+              <div className="flex-1">
+                <div className="text-sm font-light mb-1">{style.name}</div>
+                <p className="text-xs font-light text-muted">{style.description}</p>
+              </div>
+              <div className={`text-xs font-light px-2 py-1 rounded-full ${getRarityBg(style.rarity)} ${getRarityColor(style.rarity)}`}>
+                {getRarityLabel(style.rarity)}
+              </div>
             </div>
           </Card>
         </section>
@@ -186,7 +271,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* 进度条 */}
             <div className="relative">
               <div className="h-2 bg-card rounded-full overflow-hidden">
                 <div 
@@ -234,7 +318,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* 经验条 */}
             <div className="h-1.5 bg-card rounded-full overflow-hidden mb-4">
               <div 
                 className="h-full bg-gradient-to-r from-yellow-400 to-orange-400 transition-all duration-500"
@@ -242,7 +325,6 @@ export default function Home() {
               />
             </div>
 
-            {/* 称号展示 */}
             <div className="flex items-center gap-2 mb-2">
               <Zap className="w-3 h-3 text-cosmic-blue" />
               <span className="text-xs font-light text-muted">已解锁称号</span>

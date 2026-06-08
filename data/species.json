@@ -1,0 +1,352 @@
+[
+  {
+    "id": "species-001",
+    "name": "人类",
+    "icon": "👤",
+    "description": "来自地球的智慧生命，充满好奇心和探索欲。",
+    "rarity": "common"
+  },
+  {
+    "id": "species-002",
+    "name": "精灵",
+    "icon": "🧝",
+    "description": "森林的守护者，与自然和谐共处，拥有长寿和魔法天赋。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-003",
+    "name": "矮人",
+    "icon": "🧔",
+    "description": "山中的工匠，擅长锻造和建筑，性格坚毅。",
+    "rarity": "common"
+  },
+  {
+    "id": "species-004",
+    "name": "兽人",
+    "icon": "🦁",
+    "description": "拥有野兽特征的人类，力量强大，忠诚勇敢。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-005",
+    "name": "龙族",
+    "icon": "🐲",
+    "description": "古老的智慧种族，拥有强大的魔法和长寿。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "species-006",
+    "name": "天使",
+    "icon": "👼",
+    "description": "来自天界的使者，拥有纯洁的心灵和神圣的力量。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "species-007",
+    "name": "恶魔",
+    "icon": "😈",
+    "description": "来自深渊的存在，拥有强大的力量和复杂的性格。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "species-008",
+    "name": "机器人",
+    "icon": "🤖",
+    "description": "人工智能生命体，拥有无限的智慧和计算能力。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-009",
+    "name": "外星人",
+    "icon": "👽",
+    "description": "来自遥远星球的智慧生命，拥有独特的外形和能力。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-010",
+    "name": "幽灵",
+    "icon": "👻",
+    "description": "逝去的灵魂，以灵体的形式存在，拥有穿越物质的能力。",
+    "rarity": "epic"
+  },
+  {
+    "id": "species-011",
+    "name": "吸血鬼",
+    "icon": "🧛",
+    "description": "夜行生物，以血液为食，拥有永生和超自然力量。",
+    "rarity": "epic"
+  },
+  {
+    "id": "species-012",
+    "name": "狼人",
+    "icon": "🐺",
+    "description": "在满月之夜变身为狼，拥有强大的力量和敏锐的感官。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-013",
+    "name": "巫师",
+    "icon": "🧙",
+    "description": "掌握古老魔法的智者，能够操控自然力量。",
+    "rarity": "epic"
+  },
+  {
+    "id": "species-014",
+    "name": "女巫",
+    "icon": "🧙‍♀️",
+    "description": "掌握神秘魔法的人，能够预知未来和施展咒语。",
+    "rarity": "epic"
+  },
+  {
+    "id": "species-015",
+    "name": "骑士",
+    "icon": "🛡️",
+    "description": "勇敢的战士，守护正义，拥有高尚的品格。",
+    "rarity": "common"
+  },
+  {
+    "id": "species-016",
+    "name": "刺客",
+    "icon": "🗡️",
+    "description": "暗影中的杀手，拥有敏捷的身手和致命的技巧。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-017",
+    "name": "牧师",
+    "icon": "⛪",
+    "description": "神圣的守护者，能够治愈伤痛和驱散邪恶。",
+    "rarity": "common"
+  },
+  {
+    "id": "species-018",
+    "name": "盗贼",
+    "icon": "💰",
+    "description": "灵活的冒险者，擅长潜行和开锁，总能找到宝藏。",
+    "rarity": "common"
+  },
+  {
+    "id": "species-019",
+    "name": "游侠",
+    "icon": "🏹",
+    "description": "森林的守护者，擅长弓箭和追踪，与自然为伴。",
+    "rarity": "common"
+  },
+  {
+    "id": "species-020",
+    "name": "战士",
+    "icon": "⚔️",
+    "description": "勇敢的战士，擅长近战，拥有强大的力量。",
+    "rarity": "common"
+  },
+  {
+    "id": "species-021",
+    "name": "法师",
+    "icon": "🔮",
+    "description": "掌握元素魔法的智者，能够操控火、水、风、土。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-022",
+    "name": "德鲁伊",
+    "icon": "🌿",
+    "description": "自然的守护者，能够与动物交流，变身成各种生物。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-023",
+    "name": "死灵法师",
+    "icon": "💀",
+    "description": "掌握死亡魔法的黑暗法师，能够召唤亡灵。",
+    "rarity": "epic"
+  },
+  {
+    "id": "species-024",
+    "name": "圣骑士",
+    "icon": "✝️",
+    "description": "神圣的战士，拥有强大的战斗力和治愈能力。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-025",
+    "name": "吟游诗人",
+    "icon": "🎸",
+    "description": "用音乐和诗歌传递故事的旅行者，拥有鼓舞人心的力量。",
+    "rarity": "common"
+  },
+  {
+    "id": "species-026",
+    "name": "炼金术士",
+    "icon": "⚗️",
+    "description": "研究物质转化的智者，能够将普通金属变成黄金。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-027",
+    "name": "占星师",
+    "icon": "🔭",
+    "description": "通过星象预测未来的智者，能够解读宇宙的秘密。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-028",
+    "name": "预言家",
+    "icon": "👁️",
+    "description": "能够看到未来的神秘人物，拥有预知能力。",
+    "rarity": "epic"
+  },
+  {
+    "id": "species-029",
+    "name": "时空行者",
+    "icon": "⏰",
+    "description": "能够穿越时空的神秘存在，不受时间束缚。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "species-030",
+    "name": "星际旅行者",
+    "icon": "🚀",
+    "description": "在宇宙中穿梭的冒险者，来自遥远的星球。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-031",
+    "name": "机械师",
+    "icon": "🔧",
+    "description": "擅长修理和制造机械的工匠，能够创造奇迹。",
+    "rarity": "common"
+  },
+  {
+    "id": "species-032",
+    "name": "黑客",
+    "icon": "💻",
+    "description": "能够入侵任何系统的技术专家，掌握着数字世界的秘密。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-033",
+    "name": "赛博格",
+    "icon": "🦾",
+    "description": "半人半机械的混合体，拥有人类智慧和机械力量。",
+    "rarity": "epic"
+  },
+  {
+    "id": "species-034",
+    "name": "克隆人",
+    "icon": "🧬",
+    "description": "通过基因技术创造的人类，拥有完美的基因。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-035",
+    "name": "生化人",
+    "icon": "🧪",
+    "description": "通过生物工程技术创造的智慧生命，拥有超常能力。",
+    "rarity": "epic"
+  },
+  {
+    "id": "species-036",
+    "name": "量子意识",
+    "icon": "⚛️",
+    "description": "存在于量子态中的意识，能够同时存在于多个地方。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "species-037",
+    "name": "能量生命体",
+    "icon": "⚡",
+    "description": "由纯粹能量构成的生命，没有实体形态。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "species-038",
+    "name": "晶体生命",
+    "icon": "💎",
+    "description": "由晶体构成的生命，拥有坚硬的身体和美丽的外表。",
+    "rarity": "epic"
+  },
+  {
+    "id": "species-039",
+    "name": "植物生命",
+    "icon": "🌱",
+    "description": "拥有智慧的植物，能够与自然沟通。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-040",
+    "name": "水元素",
+    "icon": "💧",
+    "description": "由水元素构成的生命，能够操控水流。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-041",
+    "name": "火元素",
+    "icon": "🔥",
+    "description": "由火元素构成的生命，能够操控火焰。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-042",
+    "name": "风元素",
+    "icon": "🌬️",
+    "description": "由风元素构成的生命，能够操控气流。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-043",
+    "name": "土元素",
+    "icon": "🪨",
+    "description": "由土元素构成的生命，能够操控大地。",
+    "rarity": "rare"
+  },
+  {
+    "id": "species-044",
+    "name": "光之使者",
+    "icon": "✨",
+    "description": "由纯粹光芒构成的生命，带来光明和希望。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "species-045",
+    "name": "暗影行者",
+    "icon": "🌑",
+    "description": "在阴影中穿行的神秘存在，能够操控黑暗。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "species-046",
+    "name": "时间守护者",
+    "icon": "⏳",
+    "description": "守护时间流动的神秘存在，能够操控时间。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "species-047",
+    "name": "空间法师",
+    "icon": "🌀",
+    "description": "能够操控空间的魔法师，能够创造传送门。",
+    "rarity": "epic"
+  },
+  {
+    "id": "species-048",
+    "name": "梦境编织者",
+    "icon": "💭",
+    "description": "能够进入和操控梦境的神秘存在。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "species-049",
+    "name": "灵魂行者",
+    "icon": "👻",
+    "description": "能够穿越生死的边界，与灵魂交流。",
+    "rarity": "legendary"
+  },
+  {
+    "id": "species-050",
+    "name": "宇宙创造者",
+    "icon": "🌌",
+    "description": "能够创造和毁灭宇宙的终极存在。",
+    "rarity": "legendary"
+  }
+]

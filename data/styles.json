@@ -1,0 +1,47 @@
+[
+  {
+    "id": "style-001",
+    "name": "梦幻水彩",
+    "icon": "🎨",
+    "description": "柔和的水彩风格，色彩渐变自然，充满梦幻感。",
+    "rarity": "common",
+    "backgroundClass": "bg-gradient-to-br from-pink-200/80 via-purple-200/60 to-blue-200/80",
+    "colorPalette": ["#FFB6C1", "#DDA0DD", "#87CEEB", "#98FB98", "#FFFACD"]
+  },
+  {
+    "id": "style-002",
+    "name": "赛博朋克",
+    "icon": "🌆",
+    "description": "霓虹灯光与机械美学，充满未来感和科技感。",
+    "rarity": "rare",
+    "backgroundClass": "bg-gradient-to-br from-cyan-900/80 via-purple-900/60 to-pink-900/80",
+    "colorPalette": ["#00FFFF", "#FF00FF", "#00FF00", "#FFFF00", "#FF0080"]
+  },
+  {
+    "id": "style-003",
+    "name": "日系动漫",
+    "icon": "🌸",
+    "description": "清新可爱的动漫风格，线条简洁，色彩明亮。",
+    "rarity": "common",
+    "backgroundClass": "bg-gradient-to-br from-pink-300/80 via-purple-300/60 to-blue-300/80",
+    "colorPalette": ["#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA"]
+  },
+  {
+    "id": "style-004",
+    "name": "暗黑哥特",
+    "icon": "🖤",
+    "description": "神秘优雅的哥特风格，深色调为主，充满神秘感。",
+    "rarity": "epic",
+    "backgroundClass": "bg-gradient-to-br from-gray-900/80 via-purple-900/60 to-black/80",
+    "colorPalette": ["#1A1A1A", "#4B0082", "#800080", "#2F4F4F", "#191970"]
+  },
+  {
+    "id": "style-005",
+    "name": "星际科幻",
+    "icon": "🚀",
+    "description": "充满科技感的科幻风格，金属质感，未来感十足。",
+    "rarity": "rare",
+    "backgroundClass": "bg-gradient-to-br from-blue-900/80 via-indigo-900/60 to-purple-900/80",
+    "colorPalette": ["#00BFFF", "#1E90FF", "#4169E1", "#6495ED", "#87CEEB"]
+  }
+]

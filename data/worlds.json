@@ -1,0 +1,502 @@
+[
+  {
+    "id": "world-001",
+    "name": "云上列车",
+    "category": "fantasy",
+    "rarity": "common",
+    "description": "在这个世界里，所有列车都行驶在云海之上。每一列火车都承载着不同的故事，从一个云端驿站驶向另一个未知的目的地。",
+    "background": "cloud-train",
+    "backgroundClass": "bg-gradient-to-b from-amber-900/80 via-orange-800/60 to-slate-900/80",
+    "icon": "🚂"
+  },
+  {
+    "id": "world-002",
+    "name": "龙眠王国",
+    "category": "fantasy",
+    "rarity": "legendary",
+    "description": "传说中，古老的巨龙沉睡在这片土地之下。它们的梦境构成了整个王国的现实。当巨龙翻身时，山脉会移动；当它们呼吸时，会带来四季的变化。",
+    "background": "dragon-kingdom",
+    "backgroundClass": "bg-gradient-to-b from-red-900/80 via-purple-900/60 to-slate-900/80",
+    "icon": "🐉"
+  },
+  {
+    "id": "world-003",
+    "name": "银河邮局",
+    "category": "scifi",
+    "rarity": "common",
+    "description": "位于银河系中心的星际邮局，专门处理跨越时空的信件。每一封信都被装入星星信封，由光速信使送往宇宙的各个角落。",
+    "background": "galaxy-post",
+    "backgroundClass": "bg-gradient-to-b from-blue-900/80 via-indigo-800/60 to-slate-900/80",
+    "icon": "🪐"
+  },
+  {
+    "id": "world-004",
+    "name": "晨曦岛",
+    "category": "healing",
+    "rarity": "common",
+    "description": "一座永远沐浴在晨光中的岛屿。这里的日出持续整整一天，金色的阳光洒满每一个角落，带来温暖和希望。",
+    "background": "dawn-island",
+    "backgroundClass": "bg-gradient-to-b from-orange-400/80 via-amber-300/60 to-slate-900/80",
+    "icon": "🌅"
+  },
+  {
+    "id": "world-005",
+    "name": "时间花园",
+    "category": "mystery",
+    "rarity": "rare",
+    "description": "一座神奇的花园，每一朵花都代表着一段记忆。园丁们精心照料这些花朵，让珍贵的记忆永远绽放。",
+    "background": "time-garden",
+    "backgroundClass": "bg-gradient-to-b from-purple-900/80 via-pink-800/60 to-slate-900/80",
+    "icon": "🌸"
+  },
+  {
+    "id": "world-006",
+    "name": "星辰图书馆",
+    "category": "mystery",
+    "rarity": "epic",
+    "description": "一座漂浮在星空中的图书馆，收藏着宇宙中所有的故事。每一本书都由星光编织而成，阅读时会有星尘飘落。",
+    "background": "star-library",
+    "backgroundClass": "bg-gradient-to-b from-indigo-900/80 via-purple-800/60 to-slate-900/80",
+    "icon": "📚"
+  },
+  {
+    "id": "world-007",
+    "name": "迷雾森林",
+    "category": "mystery",
+    "rarity": "rare",
+    "description": "一片永远笼罩在迷雾中的森林。迷雾中隐藏着无数秘密，只有最勇敢的旅人才能找到出口。",
+    "background": "misty-forest",
+    "backgroundClass": "bg-gradient-to-b from-gray-900/80 via-emerald-800/60 to-slate-900/80",
+    "icon": "🌲"
+  },
+  {
+    "id": "world-008",
+    "name": "太空港",
+    "category": "scifi",
+    "rarity": "legendary",
+    "description": "银河系最大的太空港，每天都有无数飞船起降。这里是星际旅行者的起点，也是他们归来的港湾。",
+    "background": "space-port",
+    "backgroundClass": "bg-gradient-to-b from-cyan-900/80 via-blue-800/60 to-slate-900/80",
+    "icon": "🚀"
+  },
+  {
+    "id": "world-009",
+    "name": "极光森林",
+    "category": "fantasy",
+    "rarity": "epic",
+    "description": "一片永远被极光笼罩的森林。绿色的光带在树梢间舞动，为森林增添了神秘的色彩。",
+    "background": "aurora-forest",
+    "backgroundClass": "bg-gradient-to-b from-green-900/80 via-emerald-700/60 to-slate-900/80",
+    "icon": "🌌"
+  },
+  {
+    "id": "world-010",
+    "name": "水晶洞穴",
+    "category": "mystery",
+    "rarity": "legendary",
+    "description": "一个完全由水晶构成的洞穴。水晶在黑暗中发出柔和的光芒，照亮了整个洞穴。",
+    "background": "crystal-cave",
+    "backgroundClass": "bg-gradient-to-b from-purple-900/80 via-pink-700/60 to-slate-900/80",
+    "icon": "💎"
+  },
+  {
+    "id": "world-011",
+    "name": "风之谷",
+    "category": "healing",
+    "rarity": "common",
+    "description": "一个永远有微风吹拂的山谷。风带来了远方的故事和花香，让每一个来到这里的人都感到宁静。",
+    "background": "wind-valley",
+    "backgroundClass": "bg-gradient-to-b from-cyan-800/80 via-blue-700/60 to-slate-900/80",
+    "icon": "🌬️"
+  },
+  {
+    "id": "world-012",
+    "name": "彩虹桥",
+    "category": "fantasy",
+    "rarity": "epic",
+    "description": "一座连接两个世界的彩虹桥。走过这座桥，就能到达另一个充满奇迹的世界。",
+    "background": "rainbow-bridge",
+    "backgroundClass": "bg-gradient-to-b from-red-900/80 via-yellow-800/60 to-blue-900/80",
+    "icon": "🌈"
+  },
+  {
+    "id": "world-013",
+    "name": "月光湖",
+    "category": "romance",
+    "rarity": "rare",
+    "description": "一个永远被月光照耀的湖泊。湖水清澈见底，倒映着满天的星星。",
+    "background": "moon-lake",
+    "backgroundClass": "bg-gradient-to-b from-blue-900/80 via-indigo-700/60 to-slate-900/80",
+    "icon": "🌙"
+  },
+  {
+    "id": "world-014",
+    "name": "星辰观测台",
+    "category": "scifi",
+    "rarity": "rare",
+    "description": "一座建在山顶的观测台，专门观测宇宙中的星星。观测者们记录着每一颗星星的故事。",
+    "background": "star-observatory",
+    "backgroundClass": "bg-gradient-to-b from-indigo-900/80 via-purple-700/60 to-slate-900/80",
+    "icon": "🔭"
+  },
+  {
+    "id": "world-015",
+    "name": "日落海滩",
+    "category": "healing",
+    "rarity": "common",
+    "description": "一个永远处于日落时分的海滩。金色的阳光洒在沙滩上，海浪轻轻拍打着海岸。",
+    "background": "sunset-beach",
+    "backgroundClass": "bg-gradient-to-b from-orange-900/80 via-red-800/60 to-slate-900/80",
+    "icon": "🏖️"
+  },
+  {
+    "id": "world-016",
+    "name": "幽灵船",
+    "category": "mystery",
+    "rarity": "legendary",
+    "description": "一艘永远在海上航行的幽灵船。船上没有船员，但船帆依然在风中飘扬。",
+    "background": "ghost-ship",
+    "backgroundClass": "bg-gradient-to-b from-gray-900/80 via-blue-900/60 to-slate-900/80",
+    "icon": "⛵"
+  },
+  {
+    "id": "world-017",
+    "name": "云端城堡",
+    "category": "fantasy",
+    "rarity": "epic",
+    "description": "一座建在云端的城堡。城堡的墙壁由云朵构成，阳光穿过云层，为城堡增添了金色的光芒。",
+    "background": "cloud-castle",
+    "backgroundClass": "bg-gradient-to-b from-amber-800/80 via-yellow-700/60 to-slate-900/80",
+    "icon": "🏰"
+  },
+  {
+    "id": "world-018",
+    "name": "星际花园",
+    "category": "healing",
+    "rarity": "rare",
+    "description": "一个漂浮在太空中的花园。花朵在失重环境中绽放，每一朵花都来自不同的星球。",
+    "background": "space-garden",
+    "backgroundClass": "bg-gradient-to-b from-purple-900/80 via-pink-800/60 to-slate-900/80",
+    "icon": "🌺"
+  },
+  {
+    "id": "world-019",
+    "name": "梦境迷宫",
+    "category": "mystery",
+    "rarity": "epic",
+    "description": "一个存在于梦境中的迷宫。迷宫的墙壁会随着梦境的变化而改变，只有找到出口才能醒来。",
+    "background": "dream-maze",
+    "backgroundClass": "bg-gradient-to-b from-indigo-900/80 via-purple-800/60 to-slate-900/80",
+    "icon": "🌀"
+  },
+  {
+    "id": "world-020",
+    "name": "火焰山",
+    "category": "fantasy",
+    "rarity": "rare",
+    "description": "一座永远燃烧的火山。火山口喷出的不是岩浆，而是五彩斑斓的火焰。",
+    "background": "fire-mountain",
+    "backgroundClass": "bg-gradient-to-b from-red-900/80 via-orange-800/60 to-slate-900/80",
+    "icon": "🌋"
+  },
+  {
+    "id": "world-021",
+    "name": "冰封王国",
+    "category": "fantasy",
+    "rarity": "epic",
+    "description": "一个永远被冰雪覆盖的王国。城堡由冰晶构成，在阳光下闪烁着七彩的光芒。",
+    "background": "ice-kingdom",
+    "backgroundClass": "bg-gradient-to-b from-cyan-900/80 via-blue-800/60 to-slate-900/80",
+    "icon": "❄️"
+  },
+  {
+    "id": "world-022",
+    "name": "沙漠绿洲",
+    "category": "healing",
+    "rarity": "common",
+    "description": "一片沙漠中的绿洲。清澈的泉水从地下涌出，为旅人提供生命的源泉。",
+    "background": "desert-oasis",
+    "backgroundClass": "bg-gradient-to-b from-amber-900/80 via-yellow-800/60 to-slate-900/80",
+    "icon": "🏜️"
+  },
+  {
+    "id": "world-023",
+    "name": "深海宫殿",
+    "category": "mystery",
+    "rarity": "legendary",
+    "description": "一座位于深海中的宫殿。宫殿由珊瑚和珍珠构成，在海底发出柔和的光芒。",
+    "background": "deep-sea-palace",
+    "backgroundClass": "bg-gradient-to-b from-blue-900/80 via-indigo-800/60 to-slate-900/80",
+    "icon": "🏛️"
+  },
+  {
+    "id": "world-024",
+    "name": "星际集市",
+    "category": "scifi",
+    "rarity": "common",
+    "description": "一个位于太空中的集市。来自各个星球的商人在这里交易各种奇珍异宝。",
+    "background": "space-market",
+    "backgroundClass": "bg-gradient-to-b from-purple-900/80 via-pink-800/60 to-slate-900/80",
+    "icon": "🛒"
+  },
+  {
+    "id": "world-025",
+    "name": "时光隧道",
+    "category": "mystery",
+    "rarity": "legendary",
+    "description": "一条连接过去和未来的隧道。穿过这条隧道，就能回到过去或前往未来。",
+    "background": "time-tunnel",
+    "backgroundClass": "bg-gradient-to-b from-indigo-900/80 via-purple-800/60 to-slate-900/80",
+    "icon": "⏳"
+  },
+  {
+    "id": "world-026",
+    "name": "星空草原",
+    "category": "healing",
+    "rarity": "rare",
+    "description": "一片永远被星空照耀的草原。草原上的每一棵草都闪烁着星光，仿佛是星星的倒影。",
+    "background": "star-meadow",
+    "backgroundClass": "bg-gradient-to-b from-indigo-900/80 via-purple-800/60 to-slate-900/80",
+    "icon": "🌾"
+  },
+  {
+    "id": "world-027",
+    "name": "魔法森林",
+    "category": "fantasy",
+    "rarity": "epic",
+    "description": "一片充满魔法的森林。每一棵树都有自己的意识，会与旅人交流。",
+    "background": "magic-forest",
+    "backgroundClass": "bg-gradient-to-b from-green-900/80 via-emerald-800/60 to-slate-900/80",
+    "icon": "🧙"
+  },
+  {
+    "id": "world-028",
+    "name": "星际飞船",
+    "category": "scifi",
+    "rarity": "rare",
+    "description": "一艘在宇宙中航行的飞船。飞船内部有完整的生态系统，旅人们可以在其中生活。",
+    "background": "spaceship",
+    "backgroundClass": "bg-gradient-to-b from-gray-900/80 via-blue-800/60 to-slate-900/80",
+    "icon": "🛸"
+  },
+  {
+    "id": "world-029",
+    "name": "梦境岛屿",
+    "category": "romance",
+    "rarity": "epic",
+    "description": "一个只存在于梦境中的岛屿。只有相爱的人才能找到这座岛屿，并在那里度过美好的时光。",
+    "background": "dream-island",
+    "backgroundClass": "bg-gradient-to-b from-pink-900/80 via-purple-800/60 to-slate-900/80",
+    "icon": "🏝️"
+  },
+  {
+    "id": "world-030",
+    "name": "星际温泉",
+    "category": "healing",
+    "rarity": "rare",
+    "description": "一个位于太空中的温泉。温泉的水来自不同的星球，每一种水都有独特的疗效。",
+    "background": "space-hot-spring",
+    "backgroundClass": "bg-gradient-to-b from-cyan-900/80 via-blue-800/60 to-slate-900/80",
+    "icon": "♨️"
+  },
+  {
+    "id": "world-031",
+    "name": "暗影王国",
+    "category": "mystery",
+    "rarity": "legendary",
+    "description": "一个由影子构成的王国。在这里，影子拥有自己的意识和生命。",
+    "background": "shadow-realm",
+    "backgroundClass": "bg-gradient-to-b from-slate-900/80 via-gray-800/60 to-black/80",
+    "icon": "🌑"
+  },
+  {
+    "id": "world-032",
+    "name": "捕梦网",
+    "category": "mystery",
+    "rarity": "rare",
+    "description": "一个巨大的捕梦网，悬挂在星空之中。它捕捉着宇宙中所有的美梦。",
+    "background": "dream-catcher",
+    "backgroundClass": "bg-gradient-to-b from-purple-900/80 via-pink-800/60 to-slate-900/80",
+    "icon": "🕸️"
+  },
+  {
+    "id": "world-033",
+    "name": "星际咖啡馆",
+    "category": "healing",
+    "rarity": "common",
+    "description": "一家位于太空中的咖啡馆。来自各个星球的旅人在这里交流故事，享受宁静的时光。",
+    "background": "space-cafe",
+    "backgroundClass": "bg-gradient-to-b from-amber-900/80 via-orange-800/60 to-slate-900/80",
+    "icon": "☕"
+  },
+  {
+    "id": "world-034",
+    "name": "魔法学院",
+    "category": "fantasy",
+    "rarity": "epic",
+    "description": "一座教授魔法的学院。学生们在这里学习各种魔法，为未来的冒险做准备。",
+    "background": "magic-academy",
+    "backgroundClass": "bg-gradient-to-b from-purple-900/80 via-indigo-800/60 to-slate-900/80",
+    "icon": "🎓"
+  },
+  {
+    "id": "world-035",
+    "name": "星际动物园",
+    "category": "healing",
+    "rarity": "rare",
+    "description": "一个位于太空中的动物园。这里生活着来自各个星球的神奇生物。",
+    "background": "space-zoo",
+    "backgroundClass": "bg-gradient-to-b from-green-900/80 via-emerald-800/60 to-slate-900/80",
+    "icon": "🦁"
+  },
+  {
+    "id": "world-036",
+    "name": "时光钟表",
+    "category": "mystery",
+    "rarity": "legendary",
+    "description": "一个巨大的钟表，悬挂在宇宙之中。它记录着宇宙中所有的时间。",
+    "background": "time-clock",
+    "backgroundClass": "bg-gradient-to-b from-amber-900/80 via-yellow-800/60 to-slate-900/80",
+    "icon": "🕰️"
+  },
+  {
+    "id": "world-037",
+    "name": "星际游乐园",
+    "category": "healing",
+    "rarity": "common",
+    "description": "一个位于太空中的游乐园。各种游乐设施在失重环境中运行，带来全新的体验。",
+    "background": "space-amusement-park",
+    "backgroundClass": "bg-gradient-to-b from-pink-900/80 via-purple-800/60 to-slate-900/80",
+    "icon": "🎡"
+  },
+  {
+    "id": "world-038",
+    "name": "魔法塔",
+    "category": "fantasy",
+    "rarity": "epic",
+    "description": "一座高耸入云的魔法塔。塔顶住着一位伟大的魔法师，他守护着宇宙的平衡。",
+    "background": "magic-tower",
+    "backgroundClass": "bg-gradient-to-b from-indigo-900/80 via-purple-800/60 to-slate-900/80",
+    "icon": "🗼"
+  },
+  {
+    "id": "world-039",
+    "name": "星际博物馆",
+    "category": "scifi",
+    "rarity": "rare",
+    "description": "一个位于太空中的博物馆。这里收藏着宇宙中所有的历史文物。",
+    "background": "space-museum",
+    "backgroundClass": "bg-gradient-to-b from-gray-900/80 via-blue-800/60 to-slate-900/80",
+    "icon": "🏛️"
+  },
+  {
+    "id": "world-040",
+    "name": "梦境城堡",
+    "category": "romance",
+    "rarity": "legendary",
+    "description": "一座只存在于梦境中的城堡。城堡的墙壁由梦境构成，每一个房间都是一个不同的梦境。",
+    "background": "dream-castle",
+    "backgroundClass": "bg-gradient-to-b from-pink-900/80 via-purple-800/60 to-slate-900/80",
+    "icon": "🏰"
+  },
+  {
+    "id": "world-041",
+    "name": "星际农场",
+    "category": "healing",
+    "rarity": "common",
+    "description": "一个位于太空中的农场。农场种植着来自各个星球的奇特植物。",
+    "background": "space-farm",
+    "backgroundClass": "bg-gradient-to-b from-green-900/80 via-emerald-800/60 to-slate-900/80",
+    "icon": "🌾"
+  },
+  {
+    "id": "world-042",
+    "name": "魔法商店",
+    "category": "fantasy",
+    "rarity": "rare",
+    "description": "一家出售魔法物品的商店。商店里摆满了各种神奇的物品，每一件都有自己的故事。",
+    "background": "magic-shop",
+    "backgroundClass": "bg-gradient-to-b from-purple-900/80 via-pink-800/60 to-slate-900/80",
+    "icon": "🧪"
+  },
+  {
+    "id": "world-043",
+    "name": "星际港口",
+    "category": "scifi",
+    "rarity": "common",
+    "description": "一个位于太空中的港口。每天都有无数飞船在这里停靠，来自各个星球的旅人在这里交流。",
+    "background": "space-harbor",
+    "backgroundClass": "bg-gradient-to-b from-cyan-900/80 via-blue-800/60 to-slate-900/80",
+    "icon": "⚓"
+  },
+  {
+    "id": "world-044",
+    "name": "时光河流",
+    "category": "mystery",
+    "rarity": "epic",
+    "description": "一条流动着时间的河流。河水从过去流向未来，每一个水滴都代表着一个瞬间。",
+    "background": "time-river",
+    "backgroundClass": "bg-gradient-to-b from-blue-900/80 via-indigo-800/60 to-slate-900/80",
+    "icon": "🌊"
+  },
+  {
+    "id": "world-045",
+    "name": "星际剧院",
+    "category": "healing",
+    "rarity": "rare",
+    "description": "一个位于太空中的剧院。来自各个星球的艺术家在这里表演，为观众带来精彩的演出。",
+    "background": "space-theater",
+    "backgroundClass": "bg-gradient-to-b from-red-900/80 via-purple-800/60 to-slate-900/80",
+    "icon": "🎭"
+  },
+  {
+    "id": "world-046",
+    "name": "魔法森林深处",
+    "category": "fantasy",
+    "rarity": "legendary",
+    "description": "魔法森林的最深处。这里隐藏着最强大的魔法，只有最勇敢的旅人才能到达。",
+    "background": "deep-magic-forest",
+    "backgroundClass": "bg-gradient-to-b from-green-900/80 via-emerald-800/60 to-slate-900/80",
+    "icon": "🌲"
+  },
+  {
+    "id": "world-047",
+    "name": "星际图书馆分馆",
+    "category": "scifi",
+    "rarity": "epic",
+    "description": "星辰图书馆的一个分馆。这里收藏着宇宙中所有的科幻小说。",
+    "background": "scifi-library",
+    "backgroundClass": "bg-gradient-to-b from-indigo-900/80 via-purple-800/60 to-slate-900/80",
+    "icon": "📖"
+  },
+  {
+    "id": "world-048",
+    "name": "梦境花园",
+    "category": "romance",
+    "rarity": "rare",
+    "description": "一个只存在于梦境中的花园。花园里的每一朵花都代表着一个美好的梦境。",
+    "background": "dream-garden",
+    "backgroundClass": "bg-gradient-to-b from-pink-900/80 via-purple-800/60 to-slate-900/80",
+    "icon": "🌷"
+  },
+  {
+    "id": "world-049",
+    "name": "星际音乐厅",
+    "category": "healing",
+    "rarity": "epic",
+    "description": "一个位于太空中的音乐厅。来自各个星球的音乐家在这里演奏，为观众带来美妙的音乐。",
+    "background": "space-concert-hall",
+    "backgroundClass": "bg-gradient-to-b from-purple-900/80 via-pink-800/60 to-slate-900/80",
+    "icon": "🎵"
+  },
+  {
+    "id": "world-050",
+    "name": "时光尽头",
+    "category": "mystery",
+    "rarity": "legendary",
+    "description": "宇宙的尽头，时间的终点。这里没有过去，也没有未来，只有永恒的现在。",
+    "background": "end-of-time",
+    "backgroundClass": "bg-gradient-to-b from-slate-900/80 via-gray-800/60 to-black/80",
+    "icon": "∞"
+  }
+]
